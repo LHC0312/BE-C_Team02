@@ -4,6 +4,7 @@ import lombok.Getter;
 
 public class CommentResponseDTO {
     @Getter
-    public static class ResponseDto{
+    public static class CommentResponseDto {
     }
 }
+
