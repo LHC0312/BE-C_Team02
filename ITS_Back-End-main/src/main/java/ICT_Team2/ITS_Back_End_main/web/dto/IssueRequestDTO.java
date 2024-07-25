@@ -10,7 +10,7 @@ public class IssueRequestDTO {
     }
 
     @Getter
-    public static class CreateDto{
+    public static class IssueCreateRequestDto {
         String title;
         String description;
         String projectId;

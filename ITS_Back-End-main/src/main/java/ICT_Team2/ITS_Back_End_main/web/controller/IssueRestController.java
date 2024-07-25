@@ -11,8 +11,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/issue")
 @RequiredArgsConstructor
@@ -24,7 +22,7 @@ public class IssueRestController {
     public ApiResponse<IssueResponseDTO.IssueResponseDto> getById(@RequestParam Integer id,
                                                                   @RequestParam Integer issueid) {
         Issue issue = issueQueryService.getIssue();
-        return ApiResponse.onSuccess(IssueConverter.toGetResultDTO(issue));
+        return ApiResponse.onSuccess(IssueConverter.toIssueResponeDto(issue));
     }
 
     @GetMapping("/{projectId}")
@@ -114,7 +112,10 @@ public class IssueRestController {
     }
 
     @PostMapping("/create")
-    public ApiResponse<IssueResponseDTO.IssueResponseDto> create(@RequestParam Integer id) {
+    public ApiResponse<IssueResponseDTO.IssueResponseDto> create(@RequestParam Integer id,
+                                                                 @RequestBody @Valid IssueRequestDTO.IssueCreateRequestDto request) {
+        //Issue issue = issueCommandService.createIssue(request);
+        //return ApiResponse.onSuccess(IssueConverter.toIssueResponeDto(issue));
         return null;
     }
 

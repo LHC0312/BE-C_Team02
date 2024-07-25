@@ -4,7 +4,7 @@ import ICT_Team2.ITS_Back_End_main.domain.Issue;
 import ICT_Team2.ITS_Back_End_main.web.dto.IssueResponseDTO;
 
 public class IssueConverter {
-    public static IssueResponseDTO.IssueResponseDto toGetResultDTO(Issue issue) {
+    public static IssueResponseDTO.IssueResponseDto toIssueResponeDto(Issue issue) {
 
         //reporter = Get
         return IssueResponseDTO.IssueResponseDto.builder()
@@ -15,4 +15,5 @@ public class IssueConverter {
                 //.reporter(issue.getRepoter())
                 .build();
     }
+
 }
