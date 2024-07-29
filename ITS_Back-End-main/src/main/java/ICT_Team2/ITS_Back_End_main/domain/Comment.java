@@ -16,16 +16,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-
-import ICT_Team2.ITS_Back_End_main.domain.User;
-import ICT_Team2.ITS_Back_End_main.domain.Issue;
 
 @Entity
 @Getter
-@Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
+@SuperBuilder
 @EnableJpaAuditing
 
 public class Comment extends BaseEntity {

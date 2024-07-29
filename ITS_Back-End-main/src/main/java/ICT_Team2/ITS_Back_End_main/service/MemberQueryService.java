@@ -6,4 +6,3 @@ public interface MemberQueryService {
     MemberResponse.MemberResponseDTO getUser(Long userId);
     MemberResponse.MemberResponseDTO getMember(Long memberId);
 }
-

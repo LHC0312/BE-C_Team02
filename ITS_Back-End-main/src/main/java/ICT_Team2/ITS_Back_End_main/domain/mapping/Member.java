@@ -1,8 +1,8 @@
 package ICT_Team2.ITS_Back_End_main.domain.mapping;
 
-import ICT_Team2.ITS_Back_End_main.domain.User;
 import ICT_Team2.ITS_Back_End_main.domain.Project;
 
+import ICT_Team2.ITS_Back_End_main.domain.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
@@ -24,3 +24,4 @@ public class Member{
     @JoinColumn(name = "project_id")
     private Project project;
 }
+

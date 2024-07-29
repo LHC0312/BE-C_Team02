@@ -1,48 +1,47 @@
 package ICT_Team2.ITS_Back_End_main.web.controller;
 
 import ICT_Team2.ITS_Back_End_main.apiPayLoad.ApiResponse;
-import ICT_Team2.ITS_Back_End_main.converter.UserConverter;
-import ICT_Team2.ITS_Back_End_main.service.MemberCommandService;
-import ICT_Team2.ITS_Back_End_main.web.dto.MemberResponse;
 import ICT_Team2.ITS_Back_End_main.web.dto.MemberRequestDTO;
+import ICT_Team2.ITS_Back_End_main.web.dto.MemberResponse;
+import ICT_Team2.ITS_Back_End_main.service.MemberCommandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import static org.hibernate.criterion.Projections.id;
 
 @RestController
 @RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberRestController {
+
     private final MemberCommandService memberCommandService;
 
     @PostMapping("/update")
-    public ApiResponse<MemberResponse.MemberResponseDTO> MemberRoleUpdateAPI(@RequestBody MemberRequestDTO.RoleUpdateDTO roleUpdateDTO) {
-        MemberResponse.MemberResponseDTO updatedMember = memberCommandService.updateRole(roleUpdateDTO);
+    public ApiResponse<MemberResponse.MemberResponseDTO> updateMemberRole(@RequestBody MemberRequestDTO.RoleUpdateDto roleUpdateDto) {
+        MemberResponse.MemberResponseDTO updatedMember = memberCommandService.updateRole(roleUpdateDto);
         return ApiResponse.onSuccess(updatedMember);
     }
 
     @DeleteMapping("/delete")
-    public ApiResponse<Void> MemberDeleteAPI(@RequestBody MemberRequestDTO.DeleteDTO deleteDTO) {
-        memberCommandService.deleteMember(deleteDTO.getId());
+    public ApiResponse<Void> deleteMember(@RequestBody MemberRequestDTO.DeleteDto deleteDto) {
+        MemberResponse.MemberResponseDTO newMember = memberCommandService.deleteMember(deleteDto);
         return ApiResponse.onSuccess(null);
     }
 
     @PostMapping("/signUp")
-    public ApiResponse<MemberResponse.MemberResponseDTO> MemberSignUpAPI(@RequestBody MemberRequestDTO.SignUpDTO signUpDTO) {
-        MemberResponse.MemberResponseDTO newMember = memberCommandService.signUp(signUpDTO);
+    public ApiResponse<MemberResponse.MemberResponseDTO> signUpMember(@RequestBody MemberRequestDTO.SignUpDto signUpDto) {
+        MemberResponse.MemberResponseDTO newMember = memberCommandService.signUp(signUpDto);
         return ApiResponse.onSuccess(newMember);
     }
 
     @PostMapping("/createAdmin")
-    public ApiResponse<MemberResponse.MemberResponseDTO> MemberCreateAdminAPI(@RequestBody MemberRequestDTO.CreatedAdminDTO createdAdminDTO) {
-        MemberResponse.MemberResponseDTO newAdmin = memberCommandService.createdAdmin(createdAdminDTO);
+    public ApiResponse<MemberResponse.MemberResponseDTO> createAdmin(@RequestBody MemberRequestDTO.CreatedAdmin createdAdminDto) {
+        MemberResponse.MemberResponseDTO newAdmin = memberCommandService.createdAdmin(createdAdminDto);
         return ApiResponse.onSuccess(newAdmin);
     }
 
     @PostMapping("/signIn")
-    public ApiResponse<MemberResponse.MemberResponseDTO> MemberSignInAPI(@RequestBody MemberRequestDTO.SignInDTO signInDTO) {
-        MemberResponse.MemberResponseDTO signedInMember = memberCommandService.signIn(signInDTO);
+    public ApiResponse<MemberResponse.MemberResponseDTO> signInMember(@RequestBody MemberRequestDTO.SignInDto signInDto) {
+        MemberResponse.MemberResponseDTO signedInMember = memberCommandService.signIn(signInDto);
         return ApiResponse.onSuccess(signedInMember);
     }
 }
+

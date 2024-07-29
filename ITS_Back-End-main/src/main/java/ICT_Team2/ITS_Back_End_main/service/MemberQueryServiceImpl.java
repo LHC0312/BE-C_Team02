@@ -1,9 +1,5 @@
 package ICT_Team2.ITS_Back_End_main.service;
 
-
-import ICT_Team2.ITS_Back_End_main.domain.User;
-import ICT_Team2.ITS_Back_End_main.domain.mapping.Member;
-import ICT_Team2.ITS_Back_End_main.repository.MemberRepository;
 import ICT_Team2.ITS_Back_End_main.repository.UserRepository;
 import ICT_Team2.ITS_Back_End_main.web.dto.MemberResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +21,18 @@ public class MemberQueryServiceImpl implements MemberQueryService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
 
+        List<MemberResponse.MemberResponseDTO> members = user.getMemberList().stream()
+                .map(User -> MemberResponse.MemberResponseDTO.builder()
+                        .id(user.getId())
+                        .role(user.getRole())
+                        .build())
+                .collect(Collectors.toList());
+
         return MemberResponse.MemberResponseDTO.builder()
                 .id(user.getId())
                 .signId(user.getSignId())
                 .name(user.getName())
-                .role(user.getRole())
+                .role(user.getRole())  // Assuming you want to return the user's role
                 .isDeleted(user.isDeleted())
                 .build();
     }
@@ -37,15 +40,12 @@ public class MemberQueryServiceImpl implements MemberQueryService {
     @Override
     @Transactional
     public MemberResponse.MemberResponseDTO getMember(Long memberId) {
-        User member = userRepository.findById(memberId)
+        User user = userRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid member ID"));
 
         return MemberResponse.MemberResponseDTO.builder()
-                .id(member.getId())
-                .signId(member.getSignId())
-                .name(member.getName())
-                .role(member.getRole())
-                .isDeleted(member.isDeleted())
+                .id(user.getId())
+                .role(user.getRole())
                 .build();
     }
 }
