@@ -22,9 +22,6 @@ public abstract class BaseEntity {
   @Column(nullable = true) //이거 펄스일까요, 업뎃 안 할 수도 있잖아
   private LocalDateTime updatedAt;
 
-  @Column(nullable = false)
-  private Boolean isDeleted;
-
 
   @Column(nullable = true)
   private LocalDateTime inactiveDate;
