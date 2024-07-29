@@ -10,7 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.math.BigInteger;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -19,10 +18,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+import ICT_Team2.ITS_Back_End_main.domain.User;
+import ICT_Team2.ITS_Back_End_main.domain.Issue;
+
 @Entity
 @Getter
 @Builder
-@NoArgsConstructor(access = AccessLevel.MODULE.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EnableJpaAuditing
 

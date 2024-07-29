@@ -4,22 +4,46 @@ import lombok.Getter;
 
 public class IssueRequestDTO {
     @Getter
-    public static class AssignDto{
+    public static class IssueAssignRequestDTO {
+        Long issueId;
+        Long assigneeId;
     }
 
     @Getter
-    public static class CreateDto{
+    public static class CreateDTO {
+        String title;
+        String description;
+        String projectId;
+        String category;
     }
 
     @Getter
-    public static class DeleteDto{
+    public static class IssueDeleteRequestDTO {
+        Long id;
     }
 
     @Getter
-    public static class StatusUpdateDto{
+    public static class StatusUpdateDTO {
+        Long issueId;
+        String description;
+        String status;
+        String priority;
+        String category;
     }
 
     @Getter
-    public static class UpdateDto{
+    public static class IssueUpdateRequestDTO {
+        Long issueId;
+        String description;
+        String status;
+        String priority;
+        String category;
     }
+
+    @Getter
+    public static class IssueStatusUpdateRequestDTO {
+        Long issueId;
+        String status;
+    }
+
 }
