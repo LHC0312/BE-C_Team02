@@ -1,4 +1,4 @@
-package ICT_2_Team.ITS_Back_End_main;
+package ICT_Team2.ITS_Back_End_main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
