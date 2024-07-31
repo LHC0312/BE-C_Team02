@@ -1,5 +1,6 @@
 package ICT_Team2.ITS_Back_End_main.service;
 
+import ICT_Team2.ITS_Back_End_main.domain.User;
 import ICT_Team2.ITS_Back_End_main.domain.enums.Status;
 import ICT_Team2.ITS_Back_End_main.repository.UserRepository;
 import ICT_Team2.ITS_Back_End_main.web.dto.MemberRequestDTO;
@@ -18,7 +19,7 @@ public class MemberCommandServiceImpl implements MemberCommandService {
 
     @Override
     @Transactional
-    public MemberResponse.MemberResponseDTO signUp(MemberRequestDTO.SignUpDto signUpDto) {
+    public MemberResponse.MemberResponseDTO signUp(MemberRequestDTO.SignUpDTO signUpDto) {
         CheckSignUp(signUpDto);
 
         User user = User.builder()
@@ -40,7 +41,7 @@ public class MemberCommandServiceImpl implements MemberCommandService {
                 .build();
     }
 
-    private void CheckSignUp(MemberRequestDTO.SignUpDto signUpDto) {
+    private void CheckSignUp(MemberRequestDTO.SignUpDTO signUpDto) {
         if (userRepository.existsBySignId(signUpDto.getSignId())) {
             throw new MemberHandler(ErrorStatus._SIGNUP_ERROR);
         }
@@ -52,7 +53,7 @@ public class MemberCommandServiceImpl implements MemberCommandService {
 
     @Override
     @Transactional
-    public MemberResponse.MemberResponseDTO signIn(MemberRequestDTO.SignInDto signInDto) {
+    public MemberResponse.MemberResponseDTO signIn(MemberRequestDTO.SignInDTO signInDto) {
         User user = (User) userRepository.findBySignIdAndPassword(signInDto.getSignId(), signInDto.getPassword())
                 .orElseThrow(() -> new MemberHandler(ErrorStatus._MEMBER_NOT_FOUND));
 
@@ -68,7 +69,7 @@ public class MemberCommandServiceImpl implements MemberCommandService {
 
     @Override
     @Transactional
-    public MemberResponse.MemberResponseDTO updateRole(MemberRequestDTO.RoleUpdateDto roleUpdateDto) {
+    public MemberResponse.MemberResponseDTO updateRole(MemberRequestDTO.RoleUpdateDTO roleUpdateDto) {
         User user = userRepository.findById(roleUpdateDto.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
 
@@ -86,7 +87,7 @@ public class MemberCommandServiceImpl implements MemberCommandService {
 
     @Override
     @Transactional
-    public MemberResponse.MemberResponseDTO deleteMember(MemberRequestDTO.DeleteDto deleteDto) { // 반환 타입 수정
+    public MemberResponse.MemberResponseDTO deleteMember(MemberRequestDTO.UserDeleteDTO deleteDto) { // 반환 타입 수정
         User user = userRepository.findById(deleteDto.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
 
@@ -104,7 +105,7 @@ public class MemberCommandServiceImpl implements MemberCommandService {
 
     @Override
     @Transactional
-    public MemberResponse.MemberResponseDTO createdAdmin(MemberRequestDTO.CreatedAdmin createdAdminDTO) {
+    public MemberResponse.MemberResponseDTO createdAdmin(MemberRequestDTO.CreatedAdminDTO createdAdminDTO) {
         User user = User.builder()
                 .signId(createdAdminDTO.getSignId())
                 .password(createdAdminDTO.getPassword())

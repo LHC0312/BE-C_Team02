@@ -12,7 +12,7 @@ public class MemberRequestDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class DeleteDto {
+    public static class UserDeleteDTO {
         private Long id;  // HEAD에서 Long 타입으로 유지
     }
 
@@ -20,7 +20,7 @@ public class MemberRequestDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class RoleUpdateDto {
+    public static class RoleUpdateDTO {
         private Long id;  // HEAD에서 Long 타입으로 유지
         private Role role;
     }
@@ -29,7 +29,7 @@ public class MemberRequestDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class SignInDto {
+    public static class SignInDTO {
         private String signId;
         private String password;
     }
@@ -38,7 +38,7 @@ public class MemberRequestDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class SignUpDto {
+    public static class SignUpDTO {
         private String signId;
         private String password;
         private String name;
@@ -49,7 +49,7 @@ public class MemberRequestDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class CreatedAdmin {
+    public static class CreatedAdminDTO {
         private String signId;
         private String password;
         private String name;

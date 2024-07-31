@@ -2,6 +2,7 @@ package ICT_Team2.ITS_Back_End_main.domain.mapping;
 
 import ICT_Team2.ITS_Back_End_main.domain.common.BaseEntity;
 import ICT_Team2.ITS_Back_End_main.domain.Issue;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,10 +11,13 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@SuperBuilder
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class AssigneeMember extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +29,9 @@ public class AssigneeMember extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "issue_id")
-    private Issue issue;
+    private Issue issue=new Issue();
+
+
 }
 
 

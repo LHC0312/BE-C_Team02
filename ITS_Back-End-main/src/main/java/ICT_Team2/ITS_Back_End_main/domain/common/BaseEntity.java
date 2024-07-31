@@ -3,8 +3,8 @@ package ICT_Team2.ITS_Back_End_main.domain.common;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -12,7 +12,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 @MappedSuperclass
 @Getter
 @Setter
-@SuperBuilder
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class BaseEntity {
 
   @CreatedDate

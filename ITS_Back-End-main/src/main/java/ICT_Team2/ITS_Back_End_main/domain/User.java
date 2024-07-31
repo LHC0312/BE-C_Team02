@@ -5,10 +5,8 @@ import ICT_Team2.ITS_Back_End_main.domain.enums.Role;
 import ICT_Team2.ITS_Back_End_main.domain.enums.Status;
 import ICT_Team2.ITS_Back_End_main.domain.mapping.AssigneeMember;
 import ICT_Team2.ITS_Back_End_main.domain.mapping.Member;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
@@ -18,7 +16,9 @@ import java.util.List;
 
 @Entity
 @Getter
-@SuperBuilder
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +39,17 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Member> memberList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "assigneeMember", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<AssigneeMember> assigneeMemberList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Comment> commentList = new ArrayList<>();
+
+    public void setRole(Role role) {
+        this.role=role;
+    }
+
+    public void setStatus(Status status) {
+        this.status=status;
+    }
 }
