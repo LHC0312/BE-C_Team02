@@ -114,9 +114,8 @@ public class IssueRestController {
     @PostMapping("/create")
     public ApiResponse<IssueResponseDTO.IssueResponseDto> create(@RequestParam Integer id,
                                                                  @RequestBody @Valid IssueRequestDTO.IssueCreateRequestDto request) {
-        //Issue issue = issueCommandService.createIssue(request);
-        //return ApiResponse.onSuccess(IssueConverter.toIssueResponeDto(issue));
-        return null;
+        Issue issue = issueCommandService.create(request);
+        return ApiResponse.onSuccess(IssueConverter.toIssueResponeDto(issue));
     }
 
 
