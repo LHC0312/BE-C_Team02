@@ -1,11 +1,10 @@
 package ICT_Team2.ITS_Back_End_main.domain;
 
 import ICT_Team2.ITS_Back_End_main.domain.common.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
+import jakarta.persistence.*;
 import lombok.*;
+
 
 @Entity
 @Getter
