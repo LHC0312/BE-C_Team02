@@ -6,6 +6,7 @@ package ICT_Team2.ITS_Back_End_main.domain;
 import ICT_Team2.ITS_Back_End_main.domain.common.BaseEntity;
 import ICT_Team2.ITS_Back_End_main.domain.enums.Priority;
 import ICT_Team2.ITS_Back_End_main.domain.enums.Status;
+import ICT_Team2.ITS_Back_End_main.domain.mapping.AssigneeMember;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,18 +24,21 @@ public class Issue extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "project_id")
-//    private Long projectId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    private Project project;
 
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-//    private Long fixer;
-//
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-//    private Long repoter;
-//
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//    private List<Long> assigneeId = new ArrayList<>();;
+
+    @ManyToOne
+    @JoinColumn(name = "fixer_id")
+    private User fixer;
+
+    @ManyToOne
+    @JoinColumn(name = "reporter_id")
+    private User reporter;
+
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
+    private List<AssigneeMember> assigneeMemberList = new ArrayList<>();
 
     @Column(nullable = false, length = 20)
     private String title;
