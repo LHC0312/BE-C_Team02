@@ -1,13 +1,17 @@
 package ICT_Team2.ITS_Back_End_main.domain;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
+import ICT_Team2.ITS_Back_End_main.domain.common.BaseEntity;
 
-public class Issue {
+import jakarta.persistence.*;
+import lombok.*;
 
-  @OneToMany(mappedBy = "Comment", cascade = CascadeType.ALL)
-  private List<Comment> commentList = new ArrayList<>();
-
+@Entity
+@Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+public class Issue extends BaseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 }

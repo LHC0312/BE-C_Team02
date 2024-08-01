@@ -1,10 +1,10 @@
-package ICT_2_Team.ITS_Back_End_main;
+package ICT_Team2.ITS_Back_End_main;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ItsApplicationTests {
+class ItsBackEndMainApplicationTests {
 
 	@Test
 	void contextLoads() {
