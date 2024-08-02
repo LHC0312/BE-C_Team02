@@ -9,7 +9,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,5 +50,6 @@ public class User extends BaseEntity {
 
     public void setStatus(Status status) {
         this.status=status;
+
     }
 }
