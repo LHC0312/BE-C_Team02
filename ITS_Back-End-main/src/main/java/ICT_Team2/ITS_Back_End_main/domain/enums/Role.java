@@ -5,4 +5,5 @@ public enum Role {
     PL,     // 프로젝트 리더
     DEV,    // 개발자
     TESTER  // 테스터
+    ;
 }
