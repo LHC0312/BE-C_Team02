@@ -5,7 +5,6 @@ import ICT_Team2.ITS_Back_End_main.domain.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 @Entity
 @Getter
 @Builder
