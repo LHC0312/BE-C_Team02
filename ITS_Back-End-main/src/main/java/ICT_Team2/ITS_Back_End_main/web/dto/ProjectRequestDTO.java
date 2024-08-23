@@ -1,6 +1,5 @@
 package ICT_Team2.ITS_Back_End_main.web.dto;
 
-<<<<<<< HEAD
 import ICT_Team2.ITS_Back_End_main.domain.mapping.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,7 +34,5 @@ public class ProjectRequestDTO {
     public static class MemberRemoveDto{
         private Long removeMemberId;
     }
-=======
-public class ProjectRequestDTO {
->>>>>>> 8146e61ea944e080fbdeaf825f8c0674470a7e53
+
 }

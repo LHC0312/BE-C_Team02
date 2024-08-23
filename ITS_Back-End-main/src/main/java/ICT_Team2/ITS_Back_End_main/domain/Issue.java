@@ -71,5 +71,8 @@ public class Issue extends BaseEntity {
     private Long score;
 
     private LocalDateTime inactiveDate;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
 }

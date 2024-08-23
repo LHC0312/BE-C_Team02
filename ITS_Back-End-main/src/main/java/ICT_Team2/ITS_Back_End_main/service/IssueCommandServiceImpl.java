@@ -1,4 +1,4 @@
-package ICT_Team2.ITS_Back_End_main.service.projectService;
+package ICT_Team2.ITS_Back_End_main.service;
 
 import ICT_Team2.ITS_Back_End_main.service.IssueCommandService;
 import lombok.RequiredArgsConstructor;

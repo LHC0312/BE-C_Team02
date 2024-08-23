@@ -1,7 +1,10 @@
 package ICT_Team2.ITS_Back_End_main.web.dto;
 
+import lombok.*;
+
+import java.time.LocalDateTime;
+
 public class CommentRequestDTO {
-<<<<<<< HEAD
     @Getter
     @Setter
     @NoArgsConstructor
@@ -35,6 +38,5 @@ public class CommentRequestDTO {
         private LocalDateTime inactiveDate;
         private Boolean isDeleted;
     }
-=======
->>>>>>> 8146e61ea944e080fbdeaf825f8c0674470a7e53
+
 }

@@ -1,6 +1,6 @@
 package ICT_Team2.ITS_Back_End_main.web.dto;
 
-<<<<<<< HEAD
+
 import ICT_Team2.ITS_Back_End_main.domain.enums.Status;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -78,7 +78,5 @@ public class MemberRequestDTO {
         private String name;
         private Role role;
     }
-=======
-public class MemberRequestDTO {
->>>>>>> 8146e61ea944e080fbdeaf825f8c0674470a7e53
+
 }

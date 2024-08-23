@@ -1,7 +1,16 @@
 package ICT_Team2.ITS_Back_End_main.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.util.List;
+
 public class IssueResponseDTO {
-<<<<<<< HEAD
+
 
     @Builder
     @Getter
@@ -37,7 +46,6 @@ public class IssueResponseDTO {
         @JsonProperty(value = "isDeleted")
         boolean isDeleted;
     }
-=======
->>>>>>> 8146e61ea944e080fbdeaf825f8c0674470a7e53
+
 }
 

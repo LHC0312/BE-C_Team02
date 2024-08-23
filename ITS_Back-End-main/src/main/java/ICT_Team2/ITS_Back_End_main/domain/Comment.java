@@ -36,7 +36,6 @@ public class Comment extends BaseEntity {
   @Column(nullable = false, length = 100)
   private String context;
 
-  private LocalDate inactiveDate;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
   private Boolean isDeleted;

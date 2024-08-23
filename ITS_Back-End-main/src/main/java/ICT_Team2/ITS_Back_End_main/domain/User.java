@@ -29,7 +29,6 @@ public class User extends BaseEntity {
     private String signId;
     private String password;
     private String name;
-    private LocalDate inactiveDate;
     private boolean isDeleted;
 
     @Enumerated(EnumType.STRING)
