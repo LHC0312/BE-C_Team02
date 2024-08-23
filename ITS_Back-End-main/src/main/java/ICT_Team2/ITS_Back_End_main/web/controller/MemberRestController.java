@@ -1,5 +1,6 @@
 package ICT_Team2.ITS_Back_End_main.web.controller;
 
+<<<<<<< HEAD
 import ICT_Team2.ITS_Back_End_main.apiPayLoad.ApiResponse;
 import ICT_Team2.ITS_Back_End_main.converter.UserConverter;
 import ICT_Team2.ITS_Back_End_main.domain.Project;
@@ -16,6 +17,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+=======
+>>>>>>> 8146e61ea944e080fbdeaf825f8c0674470a7e53
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +29,7 @@ import java.util.Optional;
 @RequestMapping("/api/v1/member")
 @RequiredArgsConstructor
 public class MemberRestController {
+<<<<<<< HEAD
 
     private final MemberCommandService memberCommandService;
     private final MemberQueryService memberQueryService;
@@ -142,3 +146,6 @@ public class MemberRestController {
 }
 
 
+=======
+}
+>>>>>>> 8146e61ea944e080fbdeaf825f8c0674470a7e53

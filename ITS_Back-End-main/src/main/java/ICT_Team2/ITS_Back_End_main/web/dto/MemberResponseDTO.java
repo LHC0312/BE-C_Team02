@@ -1,5 +1,6 @@
 package ICT_Team2.ITS_Back_End_main.web.dto;
 
+<<<<<<< HEAD
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,5 +22,8 @@ public class MemberResponseDTO {
         private Boolean isDeleted;
     }
 
+=======
+public class MemberResponseDTO {
+>>>>>>> 8146e61ea944e080fbdeaf825f8c0674470a7e53
 }
 

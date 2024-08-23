@@ -4,6 +4,15 @@ import ICT_Team2.ITS_Back_End_main.domain.common.BaseEntity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+
+import ICT_Team2.ITS_Back_End_main.domain.enums.Priority;
+import ICT_Team2.ITS_Back_End_main.domain.enums.Status;
+import ICT_Team2.ITS_Back_End_main.domain.mapping.AssigneeMember;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import ICT_Team2.ITS_Back_End_main.domain.enums.Priority;
@@ -17,38 +26,50 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @Builder
-@NoArgsConstructor
+
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Issue extends BaseEntity {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-  @Column(nullable = false, length = 20)
-  private String title;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(nullable = false)
-  private String description;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "project_id")
+//    private Project project;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "fixer_id")
+//    private User fixer;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "reporter_id")
+//    private User reporter;
+//
+//    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
+//    private List<AssigneeMember> assigneeMemberList = new ArrayList<>();
 
-  @Enumerated(EnumType.STRING)
-  @Column(columnDefinition = "VARCHAR(20)")
-  private Status status;
+    @Column(nullable = false, length = 20)
+    private String title;
 
-  @Enumerated(EnumType.STRING)
-  @Column(columnDefinition = "VARCHAR(20)")
-  private Priority priority;
+    @Column(nullable = false)
+    private String description;
 
-  @Column(nullable = true, length = 20)
-  private String category;
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(20)")
+    private Status status;
 
-  @Column
-  private Long score;
+    private LocalDate reportedDate;
 
-  @Column
-  @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
-  private List<Comment> commentList = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(20)")
+    private Priority priority;
 
-  @JoinColumn
-  @ManyToOne(fetch = FetchType.LAZY)
-  private Project project = new Project();
+    @Column(nullable = true, length = 20)
+    private String category;
+
+    private Long score;
+
+    private LocalDateTime inactiveDate;
 
 }

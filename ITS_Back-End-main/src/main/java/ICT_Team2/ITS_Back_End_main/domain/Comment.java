@@ -16,6 +16,11 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+
+import jakarta.persistence.*;
+import lombok.*;
+
+
 @Entity
 @Getter
 @Builder
@@ -43,7 +48,6 @@ public class Comment extends BaseEntity {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "issue_id")
   private Issue issue;
-
 
 
 

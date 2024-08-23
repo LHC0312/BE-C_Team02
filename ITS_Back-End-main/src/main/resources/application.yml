@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/its
     username: root
-    password: 1569
+    password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
   sql:
     init:
@@ -16,6 +16,12 @@ spring:
         show_sql: true
         format_sql: true
         use_sql_comments: true
+<<<<<<< HEAD
         default_batch_fetch_size: 1000
 
 
+=======
+        hbm2ddl:
+          auto: create
+        default_batch_fetch_size: 1000
+>>>>>>> 8146e61ea944e080fbdeaf825f8c0674470a7e53

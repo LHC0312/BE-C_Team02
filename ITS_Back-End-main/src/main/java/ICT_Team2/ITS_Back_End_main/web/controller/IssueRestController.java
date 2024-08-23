@@ -1,5 +1,6 @@
 package ICT_Team2.ITS_Back_End_main.web.controller;
 
+<<<<<<< HEAD
 /*import ICT_Team2.ITS_Back_End_main.apiPayLoad.ApiResponse;
 import ICT_Team2.ITS_Back_End_main.converter.IssueConverter;
 import ICT_Team2.ITS_Back_End_main.domain.Issue;
@@ -9,12 +10,15 @@ import ICT_Team2.ITS_Back_End_main.web.dto.IssueResponseDTO;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+=======
+import lombok.RequiredArgsConstructor;
+>>>>>>> 8146e61ea944e080fbdeaf825f8c0674470a7e53
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/issues")
 public class IssueRestController {
+<<<<<<< HEAD
     private final IssueQueryService issueQueryService;
 
     @Autowired
@@ -120,3 +124,6 @@ public class IssueRestController {
     }
 
 }*/
+=======
+}
+>>>>>>> 8146e61ea944e080fbdeaf825f8c0674470a7e53

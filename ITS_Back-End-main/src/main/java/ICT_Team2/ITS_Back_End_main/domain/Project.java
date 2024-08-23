@@ -1,6 +1,7 @@
 package ICT_Team2.ITS_Back_End_main.domain;
 
 import ICT_Team2.ITS_Back_End_main.domain.common.BaseEntity;
+<<<<<<< HEAD
 import ICT_Team2.ITS_Back_End_main.domain.enums.Status;
 import ICT_Team2.ITS_Back_End_main.domain.mapping.Member;
 import jakarta.persistence.*;
@@ -25,8 +26,8 @@ public class Project extends BaseEntity {
     @Column(length = 20, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private List<Member> memberList = new ArrayList<>();  // Member 엔티티와의 관계 설정
+    //@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    //private List<Member> memberList = new ArrayList<>();  // Member 엔티티와의 관계 설정
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Issue> issueList = new ArrayList<>();    // Issue 엔티티와의 관계 설정

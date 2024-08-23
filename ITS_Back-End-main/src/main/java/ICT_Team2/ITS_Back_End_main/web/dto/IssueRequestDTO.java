@@ -1,5 +1,6 @@
 package ICT_Team2.ITS_Back_End_main.web.dto;
 
+<<<<<<< HEAD
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -67,4 +68,7 @@ public class IssueRequestDTO {
         String status;
     }
 
+=======
+public class IssueRequestDTO {
+>>>>>>> 8146e61ea944e080fbdeaf825f8c0674470a7e53
 }

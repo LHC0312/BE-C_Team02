@@ -1,5 +1,6 @@
 package ICT_Team2.ITS_Back_End_main.web.controller;
 
+<<<<<<< HEAD
 import ICT_Team2.ITS_Back_End_main.apiPayLoad.ApiResponse;
 import ICT_Team2.ITS_Back_End_main.service.CommentCommandService;
 import ICT_Team2.ITS_Back_End_main.web.dto.CommentRequestDTO;
@@ -17,10 +18,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 /*
+=======
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+>>>>>>> 8146e61ea944e080fbdeaf825f8c0674470a7e53
 @RestController
 @RequestMapping("/comment")
 @RequiredArgsConstructor
 public class CommentRestController {
+<<<<<<< HEAD
 
   private final CommentCommandService commentService;
 
@@ -55,3 +62,6 @@ public class CommentRestController {
   }
 }*/
 
+=======
+}
+>>>>>>> 8146e61ea944e080fbdeaf825f8c0674470a7e53
