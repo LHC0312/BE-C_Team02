@@ -1,16 +1,13 @@
 package ICT_Team2.ITS_Back_End_main.domain;
 
 import ICT_Team2.ITS_Back_End_main.domain.common.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,30 +18,33 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @Entity
 @Getter
-@SuperBuilder
+@Builder
 @EnableJpaAuditing
-
+@NoArgsConstructor
+@AllArgsConstructor
 public class Comment extends BaseEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private BigInteger id;
+  private Long id;
 
   @Column(nullable = false, length = 100)
   private String context;
 
-  private LocalDateTime inactiveDate;
+  private LocalDate inactiveDate;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
   private Boolean isDeleted;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "writerId")
+  @JoinColumn(name = "writer_id")
   private User user;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "issueID")
+  @JoinColumn(name = "issue_id")
   private Issue issue;
+
+
 
 
 

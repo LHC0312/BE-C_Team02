@@ -1,25 +1,26 @@
 package ICT_Team2.ITS_Back_End_main.web.controller;
 
-import ICT_Team2.ITS_Back_End_main.apiPayLoad.ApiResponse;
+/*import ICT_Team2.ITS_Back_End_main.apiPayLoad.ApiResponse;
 import ICT_Team2.ITS_Back_End_main.converter.IssueConverter;
 import ICT_Team2.ITS_Back_End_main.domain.Issue;
-import ICT_Team2.ITS_Back_End_main.service.issueService.IssueCommandService;
-import ICT_Team2.ITS_Back_End_main.service.issueService.IssueQueryService;
+import ICT_Team2.ITS_Back_End_main.service.IssueQueryService;
 import ICT_Team2.ITS_Back_End_main.web.dto.IssueRequestDTO;
 import ICT_Team2.ITS_Back_End_main.web.dto.IssueResponseDTO;
 
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/issue")
-@RequiredArgsConstructor
+@RequestMapping("/issues")
 public class IssueRestController {
     private final IssueQueryService issueQueryService;
-    private final IssueCommandService issueCommandService;
 
+    @Autowired
+    public IssueRestController(IssueQueryService issueQueryService) {
+        this.issueQueryService = issueQueryService;
+    }
     @GetMapping("/")
     public ApiResponse<List<IssueResponseDTO.IssueResponseDto>> getById(@RequestParam Integer id,
                                                                         @RequestParam Integer issueid) {
@@ -118,4 +119,4 @@ public class IssueRestController {
         return null;
     }
 
-}
+}*/

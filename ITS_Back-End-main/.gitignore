@@ -17,8 +17,6 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
-# Ignore application configuration files
-application.yml
 
 
 ### IntelliJ IDEA ###

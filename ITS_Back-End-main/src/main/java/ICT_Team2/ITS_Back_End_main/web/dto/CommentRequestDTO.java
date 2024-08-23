@@ -13,7 +13,7 @@ public class CommentRequestDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class CreateDto {
+    public static class CommentCreateDto {
         private Long issueId;
         private Long writerId;
         private String context;
@@ -24,7 +24,7 @@ public class CommentRequestDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class DeleteDto {
+    public static class CommentDeleteDto {
         private Long id;
         private Long writerId;
     }
@@ -34,7 +34,7 @@ public class CommentRequestDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class UpdateRequestDto {
+    public static class CommentUpdateRequestDto {
         private Long id;
         private Long writerId;
         private String context;

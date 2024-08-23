@@ -21,16 +21,17 @@ public class IssueResponseDTO {
         String description;
         String priority;
         String status;
-        MemberResponse reporter;
+        MemberResponseDTO reporter;
         LocalDate reportedDate;
-        MemberResponse fixer;
-        MemberResponse assignee;
+        MemberResponseDTO fixer;
+        MemberResponseDTO assignee;
         Long projectId;
         String category;
         List<CommentResponseDTO> comments;
         @JsonProperty(value = "isDeleted")
         boolean isDeleted;
     }
+
 
     @Builder
     @Getter

@@ -1,16 +1,17 @@
 package ICT_Team2.ITS_Back_End_main.service;
 
+import ICT_Team2.ITS_Back_End_main.converter.UserConverter;
 import ICT_Team2.ITS_Back_End_main.domain.User;
+import ICT_Team2.ITS_Back_End_main.domain.enums.Role;
 import ICT_Team2.ITS_Back_End_main.domain.enums.Status;
 import ICT_Team2.ITS_Back_End_main.repository.UserRepository;
 import ICT_Team2.ITS_Back_End_main.web.dto.MemberRequestDTO;
-import ICT_Team2.ITS_Back_End_main.web.dto.MemberResponse;
+import ICT_Team2.ITS_Back_End_main.web.dto.MemberResponseDTO;
 import ICT_Team2.ITS_Back_End_main.apiPayLoad.exception.handler.MemberHandler;
 import ICT_Team2.ITS_Back_End_main.apiPayLoad.code.status.ErrorStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 @Service
 public class MemberCommandServiceImpl implements MemberCommandService {
 
@@ -19,109 +20,64 @@ public class MemberCommandServiceImpl implements MemberCommandService {
 
     @Override
     @Transactional
-    public MemberResponse.MemberResponseDTO signUp(MemberRequestDTO.SignUpDTO signUpDto) {
-        CheckSignUp(signUpDto);
+    public User signUp(User user) {
+        if (userRepository.existsBySignId(user.getSignId())) {
+            throw new MemberHandler(ErrorStatus._SIGNID_ERROR);
+        }
 
-        User user = User.builder()
-                .signId(signUpDto.getSignId())
-                .password(signUpDto.getPassword())
-                .name(signUpDto.getName())
-                .role(signUpDto.getRole())
-                .status(Status.ACTIVE)
-                .build();
-
+        user.setStatus(Status.ACTIVE);
         userRepository.save(user);
 
-        return MemberResponse.MemberResponseDTO.builder()
-                .id(user.getId())
-                .signId(user.getSignId())
-                .name(user.getName())
-                .role(user.getRole())
-                .isDeleted(user.isDeleted())
-                .build();
-    }
-
-    private void CheckSignUp(MemberRequestDTO.SignUpDTO signUpDto) {
-        if (userRepository.existsBySignId(signUpDto.getSignId())) {
-            throw new MemberHandler(ErrorStatus._SIGNUP_ERROR);
-        }
-
-        if (signUpDto.getPassword() == null || signUpDto.getPassword().isEmpty()) {
-            throw new MemberHandler(ErrorStatus._SIGNUP_ERROR);
-        }
+        return user;
     }
 
     @Override
     @Transactional
-    public MemberResponse.MemberResponseDTO signIn(MemberRequestDTO.SignInDTO signInDto) {
-        User user = (User) userRepository.findBySignIdAndPassword(signInDto.getSignId(), signInDto.getPassword())
+    public User signIn(User user) {
+        User existingUser = (User) userRepository.findBySignId(user.getSignId())
                 .orElseThrow(() -> new MemberHandler(ErrorStatus._MEMBER_NOT_FOUND));
 
-        return MemberResponse.MemberResponseDTO.builder()
-                .id(user.getId())
-                .signId(user.getSignId())
-                .name(user.getName())
-                .role(user.getRole())
-                .isDeleted(user.isDeleted())
-                .build();
+        // 비밀번호 확인 로직
+        if (!existingUser.getPassword().equals(user.getPassword())) {
+            throw new MemberHandler(ErrorStatus._INVALID_PASSWORD);
+        }
+
+        return existingUser;
     }
 
 
     @Override
     @Transactional
-    public MemberResponse.MemberResponseDTO updateRole(MemberRequestDTO.RoleUpdateDTO roleUpdateDto) {
-        User user = userRepository.findById(roleUpdateDto.getId())
+    public User updateRole(User user) {
+        User existingUser = userRepository.findById(user.getId())
+                .orElseThrow(() -> new MemberHandler(ErrorStatus._MEMBER_NOT_FOUND));
+
+        existingUser.setRole(user.getRole());
+        userRepository.save(existingUser);
+
+        return existingUser;
+    }
+
+    @Override
+    @Transactional
+    public User deleteMember(User user) {
+        User existingUser = userRepository.findById(user.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
 
-        user.setRole(roleUpdateDto.getRole());
-        userRepository.save(user);
+        existingUser.setStatus(Status.INACTIVE);
+        userRepository.save(existingUser);
 
-        return MemberResponse.MemberResponseDTO.builder()
-                .id(user.getId())
-                .signId(user.getSignId())
-                .name(user.getName())
-                .role(user.getRole())
-                .isDeleted(user.isDeleted())
-                .build();
+        return existingUser;
     }
 
     @Override
     @Transactional
-    public MemberResponse.MemberResponseDTO deleteMember(MemberRequestDTO.UserDeleteDTO deleteDto) { // 반환 타입 수정
-        User user = userRepository.findById(deleteDto.getId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
-
-        user.setStatus(Status.INACTIVE);
+    public User createAdmin(User user) {
+        user.setRole(Role.ADMIN);
         userRepository.save(user);
 
-        return MemberResponse.MemberResponseDTO.builder()
-                .id(user.getId())
-                .signId(user.getSignId())
-                .name(user.getName())
-                .role(user.getRole())
-                .isDeleted(user.isDeleted())
-                .build();
-    }
-
-    @Override
-    @Transactional
-    public MemberResponse.MemberResponseDTO createdAdmin(MemberRequestDTO.CreatedAdminDTO createdAdminDTO) {
-        User user = User.builder()
-                .signId(createdAdminDTO.getSignId())
-                .password(createdAdminDTO.getPassword())
-                .name(createdAdminDTO.getName())
-                .role(createdAdminDTO.getRole())
-                .status(Status.ACTIVE)
-                .build();
-
-        userRepository.save(user);
-
-        return MemberResponse.MemberResponseDTO.builder()
-                .id(user.getId())
-                .signId(user.getSignId())
-                .name(user.getName())
-                .role(user.getRole())
-                .isDeleted(user.isDeleted())
-                .build();
+        return user;
     }
 }
+
+

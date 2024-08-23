@@ -1,5 +1,6 @@
 package ICT_Team2.ITS_Back_End_main.domain.mapping;
 
+import ICT_Team2.ITS_Back_End_main.domain.User;
 import ICT_Team2.ITS_Back_End_main.domain.common.BaseEntity;
 import ICT_Team2.ITS_Back_End_main.domain.Issue;
 import jakarta.persistence.*;
@@ -10,7 +11,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,12 +24,13 @@ public class AssigneeMember extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @JoinColumn(name = "userId")
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "issue_id")
-    private Issue issue=new Issue();
+    @JoinColumn(name = "issueId")
+    private Issue issue;
+
 
 
 }

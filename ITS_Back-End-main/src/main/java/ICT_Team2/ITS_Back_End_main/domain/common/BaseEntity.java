@@ -1,7 +1,11 @@
 package ICT_Team2.ITS_Back_End_main.domain.common;
 
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.*;
@@ -12,7 +16,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 @MappedSuperclass
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class BaseEntity {
@@ -30,9 +33,9 @@ public abstract class BaseEntity {
 
 
   @Column(nullable = true)
-  private LocalDateTime inactiveDate;
+  private LocalDate inactiveDate;
   public void deactivate() {
-    this.inactiveDate = LocalDateTime.now();
+    this.inactiveDate = LocalDate.now();
   }
 
 }
