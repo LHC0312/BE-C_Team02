@@ -1,55 +1,82 @@
-package ICT_Team2.ITS_Back_End_main.service.projectService;
+package ICT_Team2.ITS_Back_End_main.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
+import ICT_Team2.ITS_Back_End_main.domain.Project;
+import ICT_Team2.ITS_Back_End_main.domain.mapping.ProjectMembership;
+import ICT_Team2.ITS_Back_End_main.repository.MemberRepository;
+import ICT_Team2.ITS_Back_End_main.repository.ProjectRepository;
 import ICT_Team2.ITS_Back_End_main.web.dto.ProjectRequestDTO;
 import ICT_Team2.ITS_Back_End_main.web.dto.ProjectResponseDTO;
-import ICT_Team2.ITS_Back_End_main.repository.ProjectRepository;
-import ICT_Team2.ITS_Back_End_main.converter.ProjectConverter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
-public class ProjectCommandServiceImpl implements ProjectCommandService {
-
-    @Autowired
-    private ProjectRepository projectRepository;
-
-    @Autowired
-    private ProjectConverter projectConverter;
+@RequiredArgsConstructor
+public class ProjectCommandServiceImpl implements ProjectCommandService{
+    private final ProjectRepository projectRepository;
+    private final MemberRepository memberRepository;
 
     @Override
-    public ProjectResponseDTO createProject(ProjectRequestDTO projectRequestDTO) {
-        Project project = projectConverter.toEntity(projectRequestDTO);
+    public ProjectResponseDTO.ProjectResponseDto createProject(ProjectRequestDTO.ProjectCreateDto projectCreateDto) {
+        // 프로젝트 생성 로직
+        Project project = Project.builder()
+                .name(projectCreateDto.getName())
+                .build();
         projectRepository.save(project);
-        return projectConverter.toResponseDto(project);
+
+        // 멤버들과 프로젝트 연결
+        for (Long memberId : projectCreateDto.getMemberIds()) {
+            ProjectMembership projectMembership = memberRepository.findById(memberId)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid memberId: " + memberId));
+            projectMembership.setProject(project);
+            memberRepository.save(projectMembership);
+        }
+
+        return ProjectResponseDTO.ProjectResponseDto.builder()
+                .id(project.getId())
+                .name(project.getName())
+                .members(project.getMemberList())
+                .issues(project.getIssueList())
+                .leaderId(project.getLeaderId())
+                .build();
     }
 
     @Override
-    public ProjectResponseDTO updateProject(Long id, ProjectRequestDTO projectRequestDTO) {
-        Project project = projectRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Project not found with id " + id));
+    public ProjectResponseDTO.ProjectResponseDto addMember(ProjectRequestDTO.MemberAddDto memberAddDto) {
+        Project project = projectRepository.findById(memberAddDto.getAddMemberId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid projectId: " + memberAddDto.getAddMemberId()));
 
-        project.setName(projectRequestDTO.getName());
-        project.setIsCreated(projectRequestDTO.getIsCreated());
-        project.setStatus(projectRequestDTO.getStatus());
-        project.setCreatedAt(projectRequestDTO.getCreatedAt());
-        project.setInactiveDate(projectRequestDTO.getInactiveDate());
-        project.setIsDeleted(projectRequestDTO.getIsDeleted());
-        project.setUpdatedAt(projectRequestDTO.getUpdatedAt());
+        ProjectMembership projectMembership = memberRepository.findById(memberAddDto.getAddMemberId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid memberId: " + memberAddDto.getAddMemberId()));
 
-        projectRepository.save(project);
+        projectMembership.setProject(project);
+        memberRepository.save(projectMembership);
 
-        return projectConverter.toResponseDto(project);
+        return ProjectResponseDTO.ProjectResponseDto.builder()
+                .id(project.getId())
+                .name(project.getName())
+                .members(project.getMemberList())
+                .issues(project.getIssueList())
+                .leaderId(project.getLeaderId())
+                .build();
     }
 
     @Override
-    public void deleteProject(Long id) {
-        Project project = projectRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Project not found with id " + id));
-        projectRepository.delete(project);
+    public ProjectResponseDTO.ProjectResponseDto removeMember(ProjectRequestDTO.MemberRemoveDto memberRemoveDto) {
+        Project project = projectRepository.findById(memberRemoveDto.getRemoveMemberId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid projectId: " + memberRemoveDto.getRemoveMemberId()));
+
+        ProjectMembership projectMembership = memberRepository.findById(memberRemoveDto.getRemoveMemberId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid memberId: " + memberRemoveDto.getRemoveMemberId()));
+
+        projectMembership.setProject(null);  // 프로젝트와의 연결 해제
+        memberRepository.save(projectMembership);
+
+        return ProjectResponseDTO.ProjectResponseDto.builder()
+                .id(project.getId())
+                .name(project.getName())
+                .members(project.getMemberList())
+                .issues(project.getIssueList())
+                .leaderId(project.getLeaderId())
+                .build();
     }
 }

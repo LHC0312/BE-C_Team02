@@ -5,8 +5,7 @@ import ICT_Team2.ITS_Back_End_main.domain.common.BaseEntity;
 import ICT_Team2.ITS_Back_End_main.domain.enums.Status;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+
 import lombok.*;
 
 @Entity
@@ -33,7 +32,7 @@ public class Comment extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private User user;
+    private Member member;
 
     private LocalDateTime inactiveDate;
     private LocalDateTime createdAt;
@@ -42,7 +41,7 @@ public class Comment extends BaseEntity {
 
 //  @ManyToOne(fetch = FetchType.LAZY)
 //  @JoinColumn(name = "writerId")
-//  private User user;
+//  private Member member;
 //
 //  @ManyToOne(fetch = FetchType.LAZY)
 //  @JoinColumn(name = "issueID")

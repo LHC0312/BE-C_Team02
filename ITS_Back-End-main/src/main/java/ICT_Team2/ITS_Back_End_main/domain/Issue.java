@@ -30,11 +30,11 @@ public class Issue extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "fixer_id")
-    private User fixer;
+    private Member fixer;
 
     @ManyToOne
     @JoinColumn(name = "reporter_id")
-    private User reporter;
+    private Member reporter;
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
     private List<AssigneeMember> assigneeMemberList = new ArrayList<>();
@@ -45,11 +45,11 @@ public class Issue extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "fixer_id")
-    private User fixer;
+    private Member fixer;
 
     @ManyToOne
     @JoinColumn(name = "reporter_id")
-    private User reporter;
+    private Member reporter;
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
     private List<AssigneeMember> assigneeMemberList = new ArrayList<>();
@@ -74,7 +74,5 @@ public class Issue extends BaseEntity {
     private String category;
 
     private Long score;
-
-    private LocalDateTime inactiveDate;
 
 }

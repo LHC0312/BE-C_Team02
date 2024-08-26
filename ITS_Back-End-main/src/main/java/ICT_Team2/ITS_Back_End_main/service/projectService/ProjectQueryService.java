@@ -1,5 +1,6 @@
-package ICT_Team2.ITS.Back_End_main;
+package ICT_Team2.ITS_Back_End_main.service.projectService;
 
+import ICT_Team2.ITS_Back_End_main.domain.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

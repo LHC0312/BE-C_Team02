@@ -1,29 +1,20 @@
 package ICT_Team2.ITS_Back_End_main.web.controller;
 
 import ICT_Team2.ITS_Back_End_main.apiPayLoad.ApiResponse;
-import ICT_Team2.ITS_Back_End_main.converter.UserConverter;
-import ICT_Team2.ITS_Back_End_main.domain.Project;
-import ICT_Team2.ITS_Back_End_main.domain.User;
-import ICT_Team2.ITS_Back_End_main.domain.enums.Role;
-import ICT_Team2.ITS_Back_End_main.service.MemberCommandServiceImpl;
-import ICT_Team2.ITS_Back_End_main.service.MemberQueryService;
-import ICT_Team2.ITS_Back_End_main.service.MemberQueryServiceImpl;
+import ICT_Team2.ITS_Back_End_main.converter.MemeberConverter;
+import ICT_Team2.ITS_Back_End_main.domain.Member;
+import ICT_Team2.ITS_Back_End_main.service.memberService.MemberQueryService;
 import ICT_Team2.ITS_Back_End_main.web.dto.MemberRequestDTO;
 import ICT_Team2.ITS_Back_End_main.web.dto.MemberResponseDTO;
-import ICT_Team2.ITS_Back_End_main.service.MemberCommandService;
-import ICT_Team2.ITS_Back_End_main.web.dto.ProjectResponseDTO;
-import io.swagger.v3.oas.annotations.Operation;
+import ICT_Team2.ITS_Back_End_main.service.memberService.MemberCommandService;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
-@RequestMapping("/api/v1/member")
+@RequestMapping("/api/v1/projectMembership")
 @RequiredArgsConstructor
 public class MemberRestController {
 
@@ -39,10 +30,10 @@ public class MemberRestController {
     })
     @PutMapping("/account/update")
     public ApiResponse<MemberResponseDTO.MemberResponseDto> updateMemberRole(@RequestBody MemberRequestDTO.UserRoleUpdateDto roleUpdateDto) {
-        User user = UserConverter.toUser(roleUpdateDto);  // DTO -> User
-        user = memberCommandService.updateRole(user);
+        Member member = MemeberConverter.toUser(roleUpdateDto);  // DTO -> Member
+        member = memberCommandService.updateRole(member);
 
-        MemberResponseDTO.MemberResponseDto responseDto = UserConverter.toUserDTO(user);  // User -> DTO
+        MemberResponseDTO.MemberResponseDto responseDto = MemeberConverter.toUserDTO(member);  // Member -> DTO
         return ApiResponse.onSuccess(responseDto);
     }
     @ApiResponses({
@@ -54,9 +45,9 @@ public class MemberRestController {
     })
     @PutMapping("/account/delete")
     public ApiResponse<MemberResponseDTO.MemberResponseDto> deleteMember(@RequestBody MemberRequestDTO.UserDeleteDto deleteDto) {
-        User user = UserConverter.toUser(deleteDto);  // DTO -> User
-        user=memberCommandService.deleteMember(user);
-        MemberResponseDTO.MemberResponseDto responseDto=UserConverter.toUserDTO(user);
+        Member member = MemeberConverter.toUser(deleteDto);  // DTO -> Member
+        member =memberCommandService.deleteMember(member);
+        MemberResponseDTO.MemberResponseDto responseDto= MemeberConverter.toUserDTO(member);
 
         return ApiResponse.onSuccess(responseDto);
     }
@@ -69,10 +60,10 @@ public class MemberRestController {
     })
     @PostMapping("/signUp")
     public ApiResponse<MemberResponseDTO.MemberResponseDto> signUpMember(@RequestBody MemberRequestDTO.SignUpDto signUpDto) {
-        User user = UserConverter.toUser(signUpDto);  // DTO -> User
-        user = memberCommandService.signUp(user);
+        Member member = MemeberConverter.toUser(signUpDto);  // DTO -> Member
+        member = memberCommandService.signUp(member);
 
-        MemberResponseDTO.MemberResponseDto responseDto = UserConverter.toSignUpDTO(user);  // User -> DTO
+        MemberResponseDTO.MemberResponseDto responseDto = MemeberConverter.toSignUpDTO(member);  // Member -> DTO
         return ApiResponse.onSuccess(responseDto);
     }
     @ApiResponses({
@@ -84,10 +75,10 @@ public class MemberRestController {
     })
     @PostMapping("/createAdmin")
     public ApiResponse<MemberResponseDTO.MemberResponseDto> createAdmin(@RequestBody MemberRequestDTO.CreatedAdminDto createdAdminDto) {
-        User user = UserConverter.toUser(createdAdminDto);  // DTO -> User
-        user = memberCommandService.createAdmin(user);
+        Member member = MemeberConverter.toUser(createdAdminDto);  // DTO -> Member
+        member = memberCommandService.createAdmin(member);
 
-        MemberResponseDTO.MemberResponseDto responseDto = UserConverter.toUserDTO(user);  // User -> DTO
+        MemberResponseDTO.MemberResponseDto responseDto = MemeberConverter.toUserDTO(member);  // Member -> DTO
         return ApiResponse.onSuccess(responseDto);
     }
     @ApiResponses({
@@ -99,10 +90,10 @@ public class MemberRestController {
     })
     @PostMapping("/signIn")
     public ApiResponse<MemberResponseDTO.MemberResponseDto> signInMember(@RequestBody MemberRequestDTO.SignInDto signInDto) {
-        User user = UserConverter.toUser(signInDto);  // DTO -> User
-        user = memberCommandService.signIn(user);
+        Member member = MemeberConverter.toUser(signInDto);  // DTO -> Member
+        member = memberCommandService.signIn(member);
 
-        MemberResponseDTO.MemberResponseDto responseDto = UserConverter.toUserDTO(user);  // User -> DTO
+        MemberResponseDTO.MemberResponseDto responseDto = MemeberConverter.toUserDTO(member);  // Member -> DTO
         return ApiResponse.onSuccess(responseDto);
     }
     @ApiResponses({
@@ -114,9 +105,9 @@ public class MemberRestController {
     })
     @GetMapping("/account")
     public ApiResponse<MemberResponseDTO.MemberResponseDto> getUserById(@RequestParam Long userId) {
-        User user = memberQueryService.findByUserId(userId);
+        Member member = memberQueryService.findByUserId(userId);
 
-        MemberResponseDTO.MemberResponseDto responseDto = UserConverter.toUserDTO(user);  // User -> DTO
+        MemberResponseDTO.MemberResponseDto responseDto = MemeberConverter.toUserDTO(member);  // Member -> DTO
         return ApiResponse.onSuccess(responseDto);
     }
 

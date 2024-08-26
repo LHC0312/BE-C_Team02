@@ -2,13 +2,12 @@ package ICT_Team2.ITS_Back_End_main.service.commentService;
 
 import ICT_Team2.ITS_Back_End_main.converter.CommentConverter;
 import ICT_Team2.ITS_Back_End_main.domain.Comment;
-import ICT_Team2.ITS_Back_End_main.domain.User;
+import ICT_Team2.ITS_Back_End_main.domain.Member;
 import ICT_Team2.ITS_Back_End_main.domain.enums.Status;
 import ICT_Team2.ITS_Back_End_main.repository.CommentRepository;
 import ICT_Team2.ITS_Back_End_main.web.dto.CommentRequestDTO;
 import ICT_Team2.ITS_Back_End_main.web.dto.CommentResponseDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,9 +18,9 @@ public class CommentCommandServiceImpl implements CommentCommandService {
 
   //생성
   @Override
-  public CommentResponseDTO.ResponseDto createComment(CommentRequestDTO.CreateDto createDto, User user) {
-    //User commentUser = userRepository.findById(user.getId()).orElseThrow(() -> new UserNotFoundException("User not found with id " + user.getId()));
-    Comment comment = CommentConverter.toEntity(createDto, user);
+  public CommentResponseDTO.ResponseDto createComment(CommentRequestDTO.CreateDto createDto, Member member) {
+    //Member commentUser = userRepository.findById(member.getId()).orElseThrow(() -> new UserNotFoundException("Member not found with id " + member.getId()));
+    Comment comment = CommentConverter.toEntity(createDto, member);
     Comment savedComment = commentRepository.save(comment);
     return CommentConverter.toResponseDto(savedComment);
   }

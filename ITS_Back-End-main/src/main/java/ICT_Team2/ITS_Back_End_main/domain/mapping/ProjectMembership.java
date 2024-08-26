@@ -1,7 +1,7 @@
 package ICT_Team2.ITS_Back_End_main.domain.mapping;
 
+import ICT_Team2.ITS_Back_End_main.domain.Member;
 import ICT_Team2.ITS_Back_End_main.domain.Project;
-import ICT_Team2.ITS_Back_End_main.domain.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +13,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Member {
+public class ProjectMembership {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class Member {
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false)
-    private User user;
+    private Member member;
 
     @Column(nullable = false)
     private String role;

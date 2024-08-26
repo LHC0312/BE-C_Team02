@@ -17,7 +17,7 @@ public class AssigneeMember {
 
     @ManyToOne
     @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
+    private ProjectMembership projectMembership;
 
     @ManyToOne
     @JoinColumn(name = "issue_id", nullable = false)

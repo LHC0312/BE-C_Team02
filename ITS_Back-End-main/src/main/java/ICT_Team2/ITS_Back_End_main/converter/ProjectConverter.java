@@ -1,5 +1,6 @@
 package ICT_Team2.ITS_Back_End_main.converter;
 
+import ICT_Team2.ITS_Back_End_main.domain.Project;
 import org.springframework.stereotype.Component;
 
 import ICT_Team2.ITS_Back_End_main.web.dto.ProjectRequestDTO;
