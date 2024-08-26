@@ -15,7 +15,6 @@ public class CommentRequestDTO {
   @Builder
   public static class CreateDto {
     private Long issueId;
-    private Long writerId;
     private String context;
   }
 
@@ -26,7 +25,6 @@ public class CommentRequestDTO {
   @Builder
   public static class DeleteDto {
     private Long id;
-    private Long writerId;
   }
 
   @Getter
@@ -36,9 +34,6 @@ public class CommentRequestDTO {
   @Builder
   public static class UpdateRequestDto {
     private Long id;
-    private Long writerId;
     private String context;
-    private LocalDateTime inactiveDate;
-    private Boolean isDeleted;
   }
 }

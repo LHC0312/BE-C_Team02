@@ -13,15 +13,19 @@ public class CommentResponseDTO {
   @NoArgsConstructor
   @AllArgsConstructor
   @Builder
-
   public static class ResponseDto {
     private Long id;
-    private Long issueId;
-    private Long writerId;
+    private Long writerId; //member responde dto
     private String context;
-    private LocalDateTime createdAt;
-    private LocalDateTime inactiveDate;
     private Boolean isDeleted;
-    private LocalDateTime updatedAt;
   }
+
+//  @Builder
+//  @Getter
+//  @NoArgsConstructor
+//  @AllArgsConstructor
+//  public static class CommentExceptionDTO{
+//    Integer flag;
+//  }
+
 }
