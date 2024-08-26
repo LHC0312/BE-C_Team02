@@ -13,6 +13,9 @@ public enum ErrorStatus implements BaseErrorCode {
     _BAD_REQUEST(HttpStatus.BAD_REQUEST, "COMMON400", "잘못된 요청입니다."),
     _UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "COMMON401", "인증이 필요합니다."),
     _FORBIDDEN(HttpStatus.FORBIDDEN, "COMMON403", "금지된 요청입니다."),
+    
+    //댓글 관련 에러
+    NOTTEXT(HttpStatus.BAD_REQUEST, "COMMENT4001", "댓글 내용은 1자 이상입니다."),
     ;
 
     private final HttpStatus httpStatus;
