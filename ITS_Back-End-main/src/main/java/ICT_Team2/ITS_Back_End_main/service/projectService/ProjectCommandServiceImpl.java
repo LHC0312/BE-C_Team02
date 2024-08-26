@@ -2,7 +2,7 @@ package ICT_Team2.ITS_Back_End_main.service;
 
 import ICT_Team2.ITS_Back_End_main.domain.Project;
 import ICT_Team2.ITS_Back_End_main.domain.mapping.ProjectMembership;
-import ICT_Team2.ITS_Back_End_main.repository.MemberRepository;
+import ICT_Team2.ITS_Back_End_main.repository.ProjectMembershipRepository;
 import ICT_Team2.ITS_Back_End_main.repository.ProjectRepository;
 import ICT_Team2.ITS_Back_End_main.web.dto.ProjectRequestDTO;
 import ICT_Team2.ITS_Back_End_main.web.dto.ProjectResponseDTO;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ProjectCommandServiceImpl implements ProjectCommandService{
     private final ProjectRepository projectRepository;
-    private final MemberRepository memberRepository;
+    private final ProjectMembershipRepository memberRepository;
 
     @Override
     public ProjectResponseDTO.ProjectResponseDto createProject(ProjectRequestDTO.ProjectCreateDto projectCreateDto) {

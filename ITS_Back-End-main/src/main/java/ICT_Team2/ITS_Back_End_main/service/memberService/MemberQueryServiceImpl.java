@@ -5,8 +5,8 @@ import ICT_Team2.ITS_Back_End_main.apiPayLoad.exception.handler.MemberHandler;
 import ICT_Team2.ITS_Back_End_main.domain.Project;
 import ICT_Team2.ITS_Back_End_main.domain.Member;
 import ICT_Team2.ITS_Back_End_main.domain.mapping.ProjectMembership;
+import ICT_Team2.ITS_Back_End_main.repository.ProjectMembershipRepository;
 import ICT_Team2.ITS_Back_End_main.repository.MemberRepository;
-import ICT_Team2.ITS_Back_End_main.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +18,14 @@ import java.util.NoSuchElementException;
 public class MemberQueryServiceImpl implements MemberQueryService {
 
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private MemberRepository memberRepository;
+    @Autowired
+    private ProjectMembershipRepository memberRepository;
 
     @Override
     @Transactional
     public Member findByUserId(Long userId) {
-        return userRepository.findById(userId)
+        return memberRepository.findById(userId)
                 .orElseThrow(() -> new MemberHandler(ErrorStatus._MEMBER_NOT_FOUND));
     }
 

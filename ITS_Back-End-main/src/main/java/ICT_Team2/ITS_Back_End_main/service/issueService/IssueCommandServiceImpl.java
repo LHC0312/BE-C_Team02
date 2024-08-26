@@ -10,7 +10,7 @@ import ICT_Team2.ITS_Back_End_main.domain.mapping.AssigneeMember;
 import ICT_Team2.ITS_Back_End_main.repository.AssigneeMemberRepository;
 import ICT_Team2.ITS_Back_End_main.repository.IssueRepository;
 import ICT_Team2.ITS_Back_End_main.repository.ProjectRepository;
-import ICT_Team2.ITS_Back_End_main.repository.UserRepository;
+import ICT_Team2.ITS_Back_End_main.repository.MemberRepository;
 import ICT_Team2.ITS_Back_End_main.web.dto.IssueRequestDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class IssueCommandServiceImpl implements IssueCommandService{
 
     private final IssueRepository issueRepository;
     private final ProjectRepository projectRepository;
-    private final UserRepository userRepository;
+    private final MemberRepository memberRepository;
     private final AssigneeMemberRepository assigneeMemberRepository;
 
     @Transactional
@@ -71,7 +71,7 @@ public class IssueCommandServiceImpl implements IssueCommandService{
     @Transactional
     public Issue assign(IssueRequestDTO.IssueAssignRequestDTO request) {
 
-        Member member = userRepository.findById(request.getAssigneeId())
+        Member member = memberRepository.findById(request.getAssigneeId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid member ID"));
 
         Issue issue = issueRepository.findById(request.getIssueId())

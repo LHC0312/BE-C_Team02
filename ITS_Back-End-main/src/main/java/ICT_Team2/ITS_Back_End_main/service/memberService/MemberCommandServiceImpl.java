@@ -3,7 +3,7 @@ package ICT_Team2.ITS_Back_End_main.service.memberService;
 import ICT_Team2.ITS_Back_End_main.domain.Member;
 import ICT_Team2.ITS_Back_End_main.domain.enums.Role;
 import ICT_Team2.ITS_Back_End_main.domain.enums.Status;
-import ICT_Team2.ITS_Back_End_main.repository.UserRepository;
+import ICT_Team2.ITS_Back_End_main.repository.MemberRepository;
 import ICT_Team2.ITS_Back_End_main.apiPayLoad.exception.handler.MemberHandler;
 import ICT_Team2.ITS_Back_End_main.apiPayLoad.code.status.ErrorStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +13,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberCommandServiceImpl implements MemberCommandService {
 
     @Autowired
-    private UserRepository userRepository;
+    private MemberRepository memberRepository;
 
     @Override
     @Transactional
     public Member signUp(Member member) {
-        if (userRepository.existsBySignId(member.getSignId())) {
+        if (memberRepository.existsBySignId(member.getSignId())) {
             throw new MemberHandler(ErrorStatus._SIGNID_ERROR);
         }
 
         member.setStatus(Status.ACTIVE);
-        userRepository.save(member);
+        memberRepository.save(member);
 
         return member;
     }
@@ -31,7 +31,7 @@ public class MemberCommandServiceImpl implements MemberCommandService {
     @Override
     @Transactional
     public Member signIn(Member member) {
-        Member existingMember = (Member) userRepository.findBySignId(member.getSignId())
+        Member existingMember = (Member) memberRepository.findBySignId(member.getSignId())
                 .orElseThrow(() -> new MemberHandler(ErrorStatus._MEMBER_NOT_FOUND));
 
         // 비밀번호 확인 로직
@@ -46,11 +46,11 @@ public class MemberCommandServiceImpl implements MemberCommandService {
     @Override
     @Transactional
     public Member updateRole(Member member) {
-        Member existingMember = userRepository.findById(member.getId())
+        Member existingMember = memberRepository.findById(member.getId())
                 .orElseThrow(() -> new MemberHandler(ErrorStatus._MEMBER_NOT_FOUND));
 
         existingMember.setRole(member.getRole());
-        userRepository.save(existingMember);
+        memberRepository.save(existingMember);
 
         return existingMember;
     }
@@ -58,11 +58,11 @@ public class MemberCommandServiceImpl implements MemberCommandService {
     @Override
     @Transactional
     public Member deleteMember(Member member) {
-        Member existingMember = userRepository.findById(member.getId())
+        Member existingMember = memberRepository.findById(member.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid member ID"));
 
         existingMember.setStatus(Status.INACTIVE);
-        userRepository.save(existingMember);
+        memberRepository.save(existingMember);
 
         return existingMember;
     }
@@ -71,7 +71,7 @@ public class MemberCommandServiceImpl implements MemberCommandService {
     @Transactional
     public Member createAdmin(Member member) {
         member.setRole(Role.ADMIN);
-        userRepository.save(member);
+        memberRepository.save(member);
 
         return member;
     }

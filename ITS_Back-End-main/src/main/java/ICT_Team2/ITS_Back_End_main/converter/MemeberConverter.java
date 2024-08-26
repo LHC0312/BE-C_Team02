@@ -5,7 +5,7 @@ import ICT_Team2.ITS_Back_End_main.web.dto.MemberRequestDTO;
 import ICT_Team2.ITS_Back_End_main.web.dto.MemberResponseDTO;
 
 public class MemeberConverter {
-    public static Member toUser(MemberRequestDTO.SignUpDto request){
+    public static Member toMember(MemberRequestDTO.SignUpDto request){
         return Member.builder()
                 .id(request.getId())
                 .signId(request.getSignId())
@@ -18,7 +18,7 @@ public class MemeberConverter {
 
 
     // MemberRequestDTO.UserRoleUpdateDto -> Member
-    public static Member toUser(MemberRequestDTO.UserRoleUpdateDto request) {
+    public static Member toMember(MemberRequestDTO.UserRoleUpdateDto request) {
         return Member.builder()
                 .id(request.getId())
                 .role(request.getRole())
@@ -26,14 +26,14 @@ public class MemeberConverter {
     }
 
     // MemberRequestDTO.UserDeleteDto -> Member
-    public static Member toUser(MemberRequestDTO.UserDeleteDto request) {
+    public static Member toMember(MemberRequestDTO.UserDeleteDto request) {
         return Member.builder()
                 .id(request.getId())
                 .build();
     }
 
     // MemberRequestDTO.CreatedAdminDto -> Member
-    public static Member toUser(MemberRequestDTO.CreatedAdminDto request) {
+    public static Member toMember(MemberRequestDTO.CreatedAdminDto request) {
         return Member.builder()
                 .signId(request.getSignId())
                 .password(request.getPassword())
@@ -43,7 +43,7 @@ public class MemeberConverter {
                 .build();
     }
 
-    public static Member toUser(MemberRequestDTO.SignInDto request){
+    public static Member toMember(MemberRequestDTO.SignInDto request){
         return Member.builder()
                 .signId(request.getSignId())
                 .password(request.getPassword())

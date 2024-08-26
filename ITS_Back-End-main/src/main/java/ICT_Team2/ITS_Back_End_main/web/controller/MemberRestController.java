@@ -30,7 +30,7 @@ public class MemberRestController {
     })
     @PutMapping("/account/update")
     public ApiResponse<MemberResponseDTO.MemberResponseDto> updateMemberRole(@RequestBody MemberRequestDTO.UserRoleUpdateDto roleUpdateDto) {
-        Member member = MemeberConverter.toUser(roleUpdateDto);  // DTO -> Member
+        Member member = MemeberConverter.toMember(roleUpdateDto);  // DTO -> Member
         member = memberCommandService.updateRole(member);
 
         MemberResponseDTO.MemberResponseDto responseDto = MemeberConverter.toUserDTO(member);  // Member -> DTO
@@ -45,7 +45,7 @@ public class MemberRestController {
     })
     @PutMapping("/account/delete")
     public ApiResponse<MemberResponseDTO.MemberResponseDto> deleteMember(@RequestBody MemberRequestDTO.UserDeleteDto deleteDto) {
-        Member member = MemeberConverter.toUser(deleteDto);  // DTO -> Member
+        Member member = MemeberConverter.toMember(deleteDto);  // DTO -> Member
         member =memberCommandService.deleteMember(member);
         MemberResponseDTO.MemberResponseDto responseDto= MemeberConverter.toUserDTO(member);
 
@@ -60,7 +60,7 @@ public class MemberRestController {
     })
     @PostMapping("/signUp")
     public ApiResponse<MemberResponseDTO.MemberResponseDto> signUpMember(@RequestBody MemberRequestDTO.SignUpDto signUpDto) {
-        Member member = MemeberConverter.toUser(signUpDto);  // DTO -> Member
+        Member member = MemeberConverter.toMember(signUpDto);  // DTO -> Member
         member = memberCommandService.signUp(member);
 
         MemberResponseDTO.MemberResponseDto responseDto = MemeberConverter.toSignUpDTO(member);  // Member -> DTO
@@ -75,7 +75,7 @@ public class MemberRestController {
     })
     @PostMapping("/createAdmin")
     public ApiResponse<MemberResponseDTO.MemberResponseDto> createAdmin(@RequestBody MemberRequestDTO.CreatedAdminDto createdAdminDto) {
-        Member member = MemeberConverter.toUser(createdAdminDto);  // DTO -> Member
+        Member member = MemeberConverter.toMember(createdAdminDto);  // DTO -> Member
         member = memberCommandService.createAdmin(member);
 
         MemberResponseDTO.MemberResponseDto responseDto = MemeberConverter.toUserDTO(member);  // Member -> DTO
@@ -90,7 +90,7 @@ public class MemberRestController {
     })
     @PostMapping("/signIn")
     public ApiResponse<MemberResponseDTO.MemberResponseDto> signInMember(@RequestBody MemberRequestDTO.SignInDto signInDto) {
-        Member member = MemeberConverter.toUser(signInDto);  // DTO -> Member
+        Member member = MemeberConverter.toMember(signInDto);  // DTO -> Member
         member = memberCommandService.signIn(member);
 
         MemberResponseDTO.MemberResponseDto responseDto = MemeberConverter.toUserDTO(member);  // Member -> DTO
