@@ -16,7 +16,6 @@ export const AccountService = () => {
     const { data } = (await API.get(
       `${URL}/account`
     )) as AxiosResponse<User.LoadAccountListResDto>;
-
     setAccounts(data);
   };
 

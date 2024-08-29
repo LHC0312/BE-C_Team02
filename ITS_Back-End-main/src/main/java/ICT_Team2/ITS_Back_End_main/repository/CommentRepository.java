@@ -14,7 +14,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
   List<Comment> findByIssue(Issue issue);
 
   // 특정 사용자가 작성한 모든 댓글을 조회
-  List<Comment> findByUserId(Long userId);
+  List<Comment> findByMemberId(Long userId);
 
   // 댓글이 특정 상태(Status)를 가진 댓글만 조회
   List<Comment> findByStatus(Status status);

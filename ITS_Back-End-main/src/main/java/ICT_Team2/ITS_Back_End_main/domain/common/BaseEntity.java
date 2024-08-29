@@ -27,8 +27,6 @@ public abstract class BaseEntity {
     @LastModifiedDate
     @Column(nullable = false)
     private LocalDateTime updatedAt;
-    @Column(nullable = false)
-    private Boolean isDeleted;
     @Column(nullable = true)
     private LocalDateTime inactiveDate;
     public void deactivate() {

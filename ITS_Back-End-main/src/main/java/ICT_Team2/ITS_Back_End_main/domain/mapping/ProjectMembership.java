@@ -2,6 +2,7 @@ package ICT_Team2.ITS_Back_End_main.domain.mapping;
 
 import ICT_Team2.ITS_Back_End_main.domain.Member;
 import ICT_Team2.ITS_Back_End_main.domain.Project;
+import ICT_Team2.ITS_Back_End_main.domain.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +14,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class ProjectMembership {
+public class ProjectMembership extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,22 +25,7 @@ public class ProjectMembership {
     private Project project;
 
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "memberId", nullable = false)
     private Member member;
 
-    @Column(nullable = false)
-    private String role;
-
-    @Column(nullable = false)
-    private String status;
-
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
-
-    private Date inactiveDate;
-
-    @Column(nullable = false)
-    private Boolean isDeleted;
-
-    private LocalDateTime updatedAt;
 }

@@ -79,7 +79,7 @@ public class IssueCommandServiceImpl implements IssueCommandService{
 
         AssigneeMember assigneeMember = AssigneeMember.builder()
                 .issue(issue)
-                .user(member)
+                .member(member)
                 .build();
 
         assigneeMemberRepository.save(assigneeMember);
@@ -93,7 +93,7 @@ public class IssueCommandServiceImpl implements IssueCommandService{
         Issue issue = issueRepository.findById(request.getIssueId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid issue ID"));
 
-        AssigneeMember assigneeMember = assigneeMemberRepository.findByUserIdAndIssueId(request.getAssigneeId(), request.getIssueId())
+        AssigneeMember assigneeMember = assigneeMemberRepository.findByMemberIdAndIssueId(request.getAssigneeId(), request.getIssueId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid member ID or issue ID"));
 
         assigneeMemberRepository.delete(assigneeMember);

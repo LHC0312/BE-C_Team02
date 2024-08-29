@@ -5,6 +5,7 @@ import ICT_Team2.ITS_Back_End_main.converter.CommentConverter;
 import ICT_Team2.ITS_Back_End_main.domain.Comment;
 import ICT_Team2.ITS_Back_End_main.domain.Issue;
 import ICT_Team2.ITS_Back_End_main.repository.CommentRepository;
+import ICT_Team2.ITS_Back_End_main.repository.IssueRepository;
 import ICT_Team2.ITS_Back_End_main.web.dto.CommentResponseDTO;
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class CommentQueryServiceImpl implements CommentQueryService {
 
   private final CommentRepository commentRepository;
+  private final IssueRepository issueRepository;
 
   @Override
   public CommentResponseDTO.ResponseDto getCommentById(Long commentId) {

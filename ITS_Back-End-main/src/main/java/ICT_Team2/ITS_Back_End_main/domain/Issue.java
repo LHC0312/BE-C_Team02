@@ -39,21 +39,6 @@ public class Issue extends BaseEntity {
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
     private List<AssigneeMember> assigneeMemberList = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id")
-    private Project project;
-
-    @ManyToOne
-    @JoinColumn(name = "fixer_id")
-    private Member fixer;
-
-    @ManyToOne
-    @JoinColumn(name = "reporter_id")
-    private Member reporter;
-
-    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
-    private List<AssigneeMember> assigneeMemberList = new ArrayList<>();
-
     @Column(nullable = false, length = 20)
     private String title;
 

@@ -15,10 +15,8 @@ public class MemberResponseDTO {
     public static class MemberResponseDto {
         private long id;
         private String signId;
-        private String password;
         private String name;
         private Role role;
-        private Boolean isDeleted;
     }
 
 

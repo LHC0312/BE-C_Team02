@@ -1,37 +1,38 @@
 package ICT_Team2.ITS_Back_End_main.converter;
 
+import ICT_Team2.ITS_Back_End_main.domain.Member;
 import ICT_Team2.ITS_Back_End_main.domain.Project;
-import org.springframework.stereotype.Component;
 
+import ICT_Team2.ITS_Back_End_main.web.dto.MemberResponseDTO;
 import ICT_Team2.ITS_Back_End_main.web.dto.ProjectRequestDTO;
 import ICT_Team2.ITS_Back_End_main.web.dto.ProjectResponseDTO;
 
-@Component
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ProjectConverter {
 
-    public ProjectResponseDTO toResponseDto(Project project) {
-        return new ProjectResponseDTO(
-                project.getId(),
-                project.getName(),
-                project.getIsCreated(),
-                project.getStatus(),
-                project.getCreatedAt(),
-                project.getInactiveDate(),
-                project.getIsDeleted(),
-                project.getUpdatedAt()
-        );
+    public static ProjectResponseDTO.ProjectResponeDto toResponseDto(Project project) {
+        List<Member> members = ProjectMembershipConverter.toMembers(project.getProjectMembershipList());
+
+        return ProjectResponseDTO.ProjectResponeDto.builder()
+                .id(project.getId())
+                .name(project.getName())
+                .members(MemberConverter.toUserDTO(members))
+                .issues(IssueConverter.toResultDTO(project.getIssueList()))
+                .build();
     }
 
-    public Project toEntity(ProjectRequestDTO projectRequestDTO) {
-        Project project = new Project();
-        project.setName(projectRequestDTO.getName());
-        project.setIsCreated(projectRequestDTO.getIsCreated());
-        project.setStatus(projectRequestDTO.getStatus());
-        project.setCreatedAt(projectRequestDTO.getCreatedAt());
-        project.setInactiveDate(projectRequestDTO.getInactiveDate());
-        project.setIsDeleted(projectRequestDTO.getIsDeleted());
-        project.setUpdatedAt(projectRequestDTO.getUpdatedAt());
-        return project;
+    public static List<ProjectResponseDTO.ProjectResponeDto> toResponseDto(List<Project> project) {
+        return project.stream()
+                .map(ProjectConverter::toResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    public Project toEntity(ProjectRequestDTO.ProjectCreateRequestDto request) {
+        return Project.builder()
+                .name(request.getName())
+                .build();
     }
 }
 

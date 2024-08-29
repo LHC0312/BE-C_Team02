@@ -4,7 +4,9 @@ import ICT_Team2.ITS_Back_End_main.domain.mapping.ProjectMembership;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProjectMembershipRepository extends JpaRepository<ProjectMembership, Long> {
-    List<ProjectMembership> findByUserId(long userId);
+    List<ProjectMembership> findByMemberId(long memberId);
+    Optional<List<ProjectMembership>> findByProjectId(long projectId);
 }

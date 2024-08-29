@@ -1,82 +1,64 @@
-package ICT_Team2.ITS_Back_End_main.service;
+package ICT_Team2.ITS_Back_End_main.service.projectService;
 
+import ICT_Team2.ITS_Back_End_main.converter.ProjectMembershipConverter;
+import ICT_Team2.ITS_Back_End_main.domain.Member;
 import ICT_Team2.ITS_Back_End_main.domain.Project;
-import ICT_Team2.ITS_Back_End_main.domain.mapping.ProjectMembership;
 import ICT_Team2.ITS_Back_End_main.repository.ProjectMembershipRepository;
 import ICT_Team2.ITS_Back_End_main.repository.ProjectRepository;
+import ICT_Team2.ITS_Back_End_main.service.memberService.MemberQueryService;
 import ICT_Team2.ITS_Back_End_main.web.dto.ProjectRequestDTO;
-import ICT_Team2.ITS_Back_End_main.web.dto.ProjectResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ProjectCommandServiceImpl implements ProjectCommandService{
+public class ProjectCommandServiceImpl implements ProjectCommandService {
     private final ProjectRepository projectRepository;
-    private final ProjectMembershipRepository memberRepository;
+    private final ProjectMembershipRepository projectMembershipRepository;
+    private final MemberQueryService memberQueryService;
+    private final ProjectQueryService projectQueryService;
 
     @Override
-    public ProjectResponseDTO.ProjectResponseDto createProject(ProjectRequestDTO.ProjectCreateDto projectCreateDto) {
+    public Project createProject(ProjectRequestDTO.ProjectCreateRequestDto request) {
         // 프로젝트 생성 로직
         Project project = Project.builder()
-                .name(projectCreateDto.getName())
+                .name(request.getName())
                 .build();
         projectRepository.save(project);
 
         // 멤버들과 프로젝트 연결
-        for (Long memberId : projectCreateDto.getMemberIds()) {
-            ProjectMembership projectMembership = memberRepository.findById(memberId)
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid memberId: " + memberId));
-            projectMembership.setProject(project);
-            memberRepository.save(projectMembership);
+        for (Long memberId : request.getMemberIds()) {
+            Member member = memberQueryService.findByMemberId(memberId);
+            addMember(project, member);
         }
 
-        return ProjectResponseDTO.ProjectResponseDto.builder()
-                .id(project.getId())
-                .name(project.getName())
-                .members(project.getMemberList())
-                .issues(project.getIssueList())
-                .leaderId(project.getLeaderId())
-                .build();
+        return project;
     }
 
     @Override
-    public ProjectResponseDTO.ProjectResponseDto addMember(ProjectRequestDTO.MemberAddDto memberAddDto) {
-        Project project = projectRepository.findById(memberAddDto.getAddMemberId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid projectId: " + memberAddDto.getAddMemberId()));
+    public Project addMember (Long projectId, ProjectRequestDTO.ProjectMemberAddRequestDto request) {
+        Project project = projectQueryService.getProjectById(projectId);
+        Member member = memberQueryService.findByMemberId(request.getAddMemberId());
 
-        ProjectMembership projectMembership = memberRepository.findById(memberAddDto.getAddMemberId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid memberId: " + memberAddDto.getAddMemberId()));
+        projectMembershipRepository.save(ProjectMembershipConverter.toProjectMemberShip(member, project));
 
-        projectMembership.setProject(project);
-        memberRepository.save(projectMembership);
-
-        return ProjectResponseDTO.ProjectResponseDto.builder()
-                .id(project.getId())
-                .name(project.getName())
-                .members(project.getMemberList())
-                .issues(project.getIssueList())
-                .leaderId(project.getLeaderId())
-                .build();
+        return project;
     }
 
     @Override
-    public ProjectResponseDTO.ProjectResponseDto removeMember(ProjectRequestDTO.MemberRemoveDto memberRemoveDto) {
-        Project project = projectRepository.findById(memberRemoveDto.getRemoveMemberId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid projectId: " + memberRemoveDto.getRemoveMemberId()));
+    public Project addMember (Project project, Member member) {
+        projectMembershipRepository.save(ProjectMembershipConverter.toProjectMemberShip(member, project));
 
-        ProjectMembership projectMembership = memberRepository.findById(memberRemoveDto.getRemoveMemberId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid memberId: " + memberRemoveDto.getRemoveMemberId()));
+        return project;
+    }
 
-        projectMembership.setProject(null);  // 프로젝트와의 연결 해제
-        memberRepository.save(projectMembership);
+    @Override
+    public Project deleteMember (Long projectId, ProjectRequestDTO.ProjectMemberRemoveRequestDto request) {
+        Project project = projectQueryService.getProjectById(projectId);
+        Member member = memberQueryService.findByMemberId(request.getRemoveMemberId());
 
-        return ProjectResponseDTO.ProjectResponseDto.builder()
-                .id(project.getId())
-                .name(project.getName())
-                .members(project.getMemberList())
-                .issues(project.getIssueList())
-                .leaderId(project.getLeaderId())
-                .build();
+        projectMembershipRepository.delete(ProjectMembershipConverter.toProjectMemberShip(member, project));
+
+        return project;
     }
 }

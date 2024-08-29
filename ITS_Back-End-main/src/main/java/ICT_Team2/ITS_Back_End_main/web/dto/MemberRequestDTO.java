@@ -18,7 +18,6 @@ public class MemberRequestDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class UserDto{
-        private Long id;
         private String signId;
         private String password;
         private String name;
@@ -33,16 +32,15 @@ public class MemberRequestDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class UserDeleteDto {
+    public static class MemberDeleteDto {
         private Long id;
-        private Status status;
     }
 
     @Builder
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class UserRoleUpdateDto {
+    public static class MemberRoleUpdateDto {
         private Long id;
         private Role role;
     }
@@ -61,7 +59,6 @@ public class MemberRequestDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class SignUpDto {
-        private Long id;
         private String signId;
         private String password;
         private String name;

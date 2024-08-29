@@ -1,6 +1,8 @@
 package ICT_Team2.ITS_Back_End_main.domain.mapping;
 
 import ICT_Team2.ITS_Back_End_main.domain.Issue;
+import ICT_Team2.ITS_Back_End_main.domain.Member;
+import ICT_Team2.ITS_Back_End_main.domain.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +11,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class AssigneeMember {
+public class AssigneeMember extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +19,7 @@ public class AssigneeMember {
 
     @ManyToOne
     @JoinColumn(name = "member_id", nullable = false)
-    private ProjectMembership projectMembership;
+    private Member member;
 
     @ManyToOne
     @JoinColumn(name = "issue_id", nullable = false)

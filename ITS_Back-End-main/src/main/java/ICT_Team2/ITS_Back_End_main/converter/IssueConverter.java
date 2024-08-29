@@ -1,6 +1,7 @@
 package ICT_Team2.ITS_Back_End_main.converter;
 
 import ICT_Team2.ITS_Back_End_main.domain.Issue;
+import ICT_Team2.ITS_Back_End_main.domain.Member;
 import ICT_Team2.ITS_Back_End_main.domain.Project;
 import ICT_Team2.ITS_Back_End_main.domain.enums.Priority;
 import ICT_Team2.ITS_Back_End_main.domain.enums.Status;
@@ -14,20 +15,17 @@ public class IssueConverter {
 
     public static IssueResponseDTO.IssueResponseDto toResultDTO(Issue issue) {
 
-
-
         return IssueResponseDTO.IssueResponseDto.builder()
                 .id(issue.getId())
                 .title(issue.getTitle())
                 .description(issue.getDescription())
                 .priority(issue.getPriority().toString())
                 .status(issue.getStatus().toString())
-                .reporter( MemberConverter.toMemberDTO(issue.getReporter()) )
+                .reporter( MemberConverter.toUserDTO(issue.getReporter()) )
                 .reportedDate(issue.getReportedDate())
-                //.fixer(issue.getFixer())
-                //.assignee(issue.getAssigneeMemberList())
+                .fixer( MemberConverter.toUserDTO(issue.getFixer()) )
+                .assignee( MemberConverter.toUserDTO(issue.getFixer()) )
                 .projectId(issue.getProject().getId())
-                //.comments()
                 .build();
     }
 
@@ -48,8 +46,4 @@ public class IssueConverter {
                 .status(Status.NEW)
                 .build();
     }
-
-
-
-
 }

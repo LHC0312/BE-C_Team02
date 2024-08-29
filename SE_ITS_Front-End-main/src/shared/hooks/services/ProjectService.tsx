@@ -24,7 +24,7 @@ export const ProjectService = () => {
   const loadAllProjectList = async () => {
     const { data } = (await API.get(
       `${URL}`
-    )) as AxiosResponse<Project.LoadAccountListResDto>;
+    )) as AxiosResponse<Project.LoadProjectListResDto>;
 
     setProjects(data);
   };

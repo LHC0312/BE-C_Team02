@@ -31,7 +31,7 @@ public class Comment extends BaseEntity {
     private Status status; // 댓글 삭제시 사용할 예정
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "writer_id")
     private Member member;
 
     private LocalDateTime inactiveDate;
@@ -39,11 +39,4 @@ public class Comment extends BaseEntity {
     private LocalDateTime updatedAt;
     private Boolean isDeleted;
 
-//  @ManyToOne(fetch = FetchType.LAZY)
-//  @JoinColumn(name = "writerId")
-//  private Member member;
-//
-//  @ManyToOne(fetch = FetchType.LAZY)
-//  @JoinColumn(name = "issueID")
-//  private Issue issue;
 }
