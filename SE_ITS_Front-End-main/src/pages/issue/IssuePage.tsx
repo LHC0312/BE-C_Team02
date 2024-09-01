@@ -43,7 +43,7 @@ const IssuePage = () => {
           setOnCreate(true);
         }}
       >
-        {issue.comments.map((comment) => (
+        {issue.comments && issue.comments.map((comment) => (
           <Comment
             id={comment.id}
             writer={comment.writer}

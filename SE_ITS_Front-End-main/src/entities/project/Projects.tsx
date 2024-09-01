@@ -14,9 +14,10 @@ export const Projects = () => {
   const [onCreate, setOnCreate] = useState(false);
   const navigate = useNavigate();
 
-  const projects = useProjectStore((state) => state.projects);
+  const projects = useProjectStore((state) => state.projects)
   const isAdmin = useUserStore((state) => state.isAdmin);
   const { loadAllProjectList } = ProjectService();
+  //console.log("projects type: "+projects.type);
 
   useEffect(() => {
     loadAllProjectList();

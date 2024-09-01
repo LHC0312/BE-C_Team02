@@ -14,7 +14,7 @@ import { Loading } from "@/entities";
 import { PAGE_URL } from "@/shared";
 
 const SignIn = lazy(() => import("@/pages/auth/signin/SignInPage"));
-const Setting = lazy(() => import("@/pages/setting/settingPage"));
+const Setting = lazy(() => import("@/pages/setting/SettingPage"));
 const Project = lazy(() => import("@/pages/project/ProjectPage"));
 const Issue = lazy(() => import("@/pages/issue/IssuePage"));
 
