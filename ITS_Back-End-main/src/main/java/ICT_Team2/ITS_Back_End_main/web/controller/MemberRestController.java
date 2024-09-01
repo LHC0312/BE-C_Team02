@@ -2,11 +2,15 @@ package ICT_Team2.ITS_Back_End_main.web.controller;
 
 import ICT_Team2.ITS_Back_End_main.apiPayLoad.ApiResponse;
 import ICT_Team2.ITS_Back_End_main.converter.MemberConverter;
+import ICT_Team2.ITS_Back_End_main.converter.ProjectConverter;
 import ICT_Team2.ITS_Back_End_main.domain.Member;
+import ICT_Team2.ITS_Back_End_main.domain.Project;
+import ICT_Team2.ITS_Back_End_main.domain.enums.Role;
 import ICT_Team2.ITS_Back_End_main.service.memberService.MemberQueryService;
 import ICT_Team2.ITS_Back_End_main.web.dto.MemberRequestDTO;
 import ICT_Team2.ITS_Back_End_main.web.dto.MemberResponseDTO;
 import ICT_Team2.ITS_Back_End_main.service.memberService.MemberCommandService;
+import ICT_Team2.ITS_Back_End_main.web.dto.ProjectResponseDTO;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -129,16 +133,14 @@ public class MemberRestController {
         ProjectResponseDTO.ProjectResponseDto responseDto=ProjectConverter.toProject(project);
         return ResponseEntity.ok(responseDto);
     }
-
+    */
     @GetMapping("/account/project/role")
-    public ResponseEntity<ProjectResponseDTO.ProjectResponseDto> getProjectWithRole(
-            @RequestHeader Long userId,
+    public ResponseEntity<List<MemberResponseDTO.MemberResponseDto>> getMemberByRole(
             @RequestParam Long projectId, @RequestParam Role role) {
 
-        Project project = memberQueryService.findProject(userId, projectId);
-        ProjectResponseDTO.ProjectResponseDto responseDto=ProjectConverter.toProject(project);
-        return ResponseEntity.ok(responseDto);
-    }*/
+        List<Member> member = memberQueryService.findByRole(projectId, role);
+        return ResponseEntity.ok(MemberConverter.toUserDTO(member));
+    }
 }
 
 

@@ -6,10 +6,12 @@ import ICT_Team2.ITS_Back_End_main.domain.enums.Status;
 import ICT_Team2.ITS_Back_End_main.repository.MemberRepository;
 import ICT_Team2.ITS_Back_End_main.apiPayLoad.exception.handler.MemberHandler;
 import ICT_Team2.ITS_Back_End_main.apiPayLoad.code.status.ErrorStatus;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 @Service
+@RequiredArgsConstructor
 public class MemberCommandServiceImpl implements MemberCommandService {
 
     @Autowired

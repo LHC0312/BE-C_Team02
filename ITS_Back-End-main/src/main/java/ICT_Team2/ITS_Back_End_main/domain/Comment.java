@@ -19,8 +19,8 @@ public class Comment extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 200)
-    private String context;
+    @Column(nullable = false, length = 500)
+    private String content;
 
     @ManyToOne
     @JoinColumn(name = "issue_id", nullable = false)
@@ -32,11 +32,6 @@ public class Comment extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "writer_id")
-    private Member member;
-
-    private LocalDateTime inactiveDate;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private Boolean isDeleted;
+    private Member writer;
 
 }

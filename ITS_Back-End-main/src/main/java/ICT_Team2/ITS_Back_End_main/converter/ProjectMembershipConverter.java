@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 
 public class ProjectMembershipConverter {
     public static List<Member> toMembers(List<ProjectMembership> projectMemberships) {
+        if (projectMemberships == null)
+            return null;
         return projectMemberships.stream().map(ProjectMembership::getMember)
                 .collect(Collectors.toList());
     }

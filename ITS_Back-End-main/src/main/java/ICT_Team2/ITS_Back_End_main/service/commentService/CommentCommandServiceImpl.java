@@ -2,6 +2,7 @@ package ICT_Team2.ITS_Back_End_main.service.commentService;
 
 import ICT_Team2.ITS_Back_End_main.converter.CommentConverter;
 import ICT_Team2.ITS_Back_End_main.domain.Comment;
+import ICT_Team2.ITS_Back_End_main.domain.Issue;
 import ICT_Team2.ITS_Back_End_main.domain.Member;
 import ICT_Team2.ITS_Back_End_main.domain.enums.Status;
 import ICT_Team2.ITS_Back_End_main.repository.CommentRepository;
@@ -18,9 +19,9 @@ public class CommentCommandServiceImpl implements CommentCommandService {
 
   //생성
   @Override
-  public CommentResponseDTO.ResponseDto createComment(CommentRequestDTO.CreateDto createDto, Member member) {
+  public CommentResponseDTO.ResponseDto createComment(CommentRequestDTO.CreateDto createDto, Member member, Issue issue) {
     //Member commentUser = userRepository.findById(member.getId()).orElseThrow(() -> new UserNotFoundException("Member not found with id " + member.getId()));
-    Comment comment = CommentConverter.toEntity(createDto, member);
+    Comment comment = CommentConverter.toEntity(createDto, member, issue);
     Comment savedComment = commentRepository.save(comment);
     return CommentConverter.toResponseDto(savedComment);
   }
@@ -31,7 +32,7 @@ public class CommentCommandServiceImpl implements CommentCommandService {
     Comment existingComment = commentRepository.findById(commentId).orElse(null);
 
     if (existingComment != null) {
-      existingComment.setContext(updateDto.getContext());
+      existingComment.setContent(updateDto.getContent());
       Comment updatedComment = commentRepository.save(existingComment);
       return CommentConverter.toResponseDto(updatedComment);
     }

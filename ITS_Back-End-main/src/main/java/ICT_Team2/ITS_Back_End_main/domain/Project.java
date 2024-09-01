@@ -26,10 +26,12 @@ public class Project extends BaseEntity {
     @Column(length = 20, nullable = false)
     private String name;
 
+
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<ProjectMembership> projectMembershipList = new ArrayList<>();
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Issue> IssueList = new ArrayList<>();
+
 }
 

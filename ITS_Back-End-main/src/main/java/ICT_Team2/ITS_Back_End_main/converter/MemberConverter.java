@@ -77,9 +77,8 @@ public class MemberConverter {
 
     // Member -> MemberResponseDTO.MemberResponseDto (일반적인 사용자 정보 DTO 변환)
     public static MemberResponseDTO.MemberResponseDto toUserDTO(Member member) {
-
-        if (member == null) return null;
-
+        if (member == null)
+            return null;
         return MemberResponseDTO.MemberResponseDto.builder()
                 .id(member.getId())
                 .signId(member.getSignId())
@@ -89,6 +88,8 @@ public class MemberConverter {
     }
 
     public static List<MemberResponseDTO.MemberResponseDto> toUserDTO(List<Member> members) {
+        if (members == null)
+            return null;
         return members.stream()
                 .map(MemberConverter::toUserDTO)
                 .collect(Collectors.toList());

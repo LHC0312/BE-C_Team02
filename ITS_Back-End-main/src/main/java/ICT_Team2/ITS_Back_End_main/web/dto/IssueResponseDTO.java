@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -22,12 +23,12 @@ public class IssueResponseDTO {
         String priority;
         String status;
         MemberResponseDTO.MemberResponseDto reporter;
-        LocalDate reportedDate;
+        LocalDateTime reportedDate;
         MemberResponseDTO.MemberResponseDto fixer;
-        MemberResponseDTO.MemberResponseDto assignee;
+        List<MemberResponseDTO.MemberResponseDto> assignee;
         Long projectId;
         String category;
-        List<CommentResponseDTO> comments;
+        List<CommentResponseDTO.ResponseDto> comments;
         @JsonProperty(value = "isDeleted")
         boolean isDeleted;
     }

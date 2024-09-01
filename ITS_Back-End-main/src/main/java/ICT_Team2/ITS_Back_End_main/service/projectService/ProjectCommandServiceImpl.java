@@ -3,6 +3,8 @@ package ICT_Team2.ITS_Back_End_main.service.projectService;
 import ICT_Team2.ITS_Back_End_main.converter.ProjectMembershipConverter;
 import ICT_Team2.ITS_Back_End_main.domain.Member;
 import ICT_Team2.ITS_Back_End_main.domain.Project;
+import ICT_Team2.ITS_Back_End_main.domain.enums.Status;
+import ICT_Team2.ITS_Back_End_main.domain.mapping.ProjectMembership;
 import ICT_Team2.ITS_Back_End_main.repository.ProjectMembershipRepository;
 import ICT_Team2.ITS_Back_End_main.repository.ProjectRepository;
 import ICT_Team2.ITS_Back_End_main.service.memberService.MemberQueryService;
@@ -54,11 +56,19 @@ public class ProjectCommandServiceImpl implements ProjectCommandService {
 
     @Override
     public Project deleteMember (Long projectId, ProjectRequestDTO.ProjectMemberRemoveRequestDto request) {
+        ProjectMembership projectMembership = projectMembershipRepository
+                .findByMemberIdAndProjectId(request.getRemoveMemberId(), projectId)
+                .orElseThrow();
+
+        projectMembershipRepository.delete(projectMembership);
+
+        return projectQueryService.getProjectById(projectId);
+    }
+
+    @Override
+    public Project deleteProject(Long projectId) {
         Project project = projectQueryService.getProjectById(projectId);
-        Member member = memberQueryService.findByMemberId(request.getRemoveMemberId());
-
-        projectMembershipRepository.delete(ProjectMembershipConverter.toProjectMemberShip(member, project));
-
+        projectRepository.delete(project);
         return project;
     }
 }

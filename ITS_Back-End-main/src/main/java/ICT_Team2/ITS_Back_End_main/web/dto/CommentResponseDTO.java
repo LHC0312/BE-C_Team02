@@ -15,8 +15,8 @@ public class CommentResponseDTO {
   @Builder
   public static class ResponseDto {
     private Long id;
-    private Long writerId; //projectMembership responde dto
-    private String context;
+    private MemberResponseDTO.MemberResponseDto writer;
+    private String content;
     private Boolean isDeleted;
   }
 

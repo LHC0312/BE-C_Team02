@@ -66,4 +66,10 @@ public class ProjectRestController {
         Project project = projectCommandService.deleteMember(id, request);
         return ResponseEntity.ok(ProjectConverter.toResponseDto(project));
     }
+
+    @PutMapping("/{projectId}")
+    public ResponseEntity<ProjectResponseDTO.ProjectResponeDto> deleteProject(@PathVariable Long projectId) {
+        Project project = projectCommandService.deleteProject(projectId);
+        return ResponseEntity.ok(ProjectConverter.toResponseDto(project));
+    }
 }

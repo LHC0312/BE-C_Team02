@@ -28,14 +28,11 @@ public class CommentQueryServiceImpl implements CommentQueryService {
   }
 
   @Override
-  public List<CommentResponseDTO.ResponseDto> getCommentsByIssueId(Long issueId) {
-    Issue issue = issueRepository.findById(issueId).orElse(null); // Issue 객체 조회
-    if (issue != null) {
-      List<Comment> comments = commentRepository.findByIssue(issue);
-      return comments.stream()
-          .map(CommentConverter::toResponseDto)
-          .collect(Collectors.toList());
-    }
-    return Collections.emptyList();
+  public List<Comment> getCommentsByIssueId(Long issueId) {
+    Issue issue = issueRepository.findById(issueId)
+            .orElseThrow(() -> new CommentNotFoundException("Comment not found with id ")); // Issue 객체 조회
+
+    return commentRepository.findByIssue(issue)
+            .orElseThrow(() -> new CommentNotFoundException("Comment not found with id "));
   }
 }

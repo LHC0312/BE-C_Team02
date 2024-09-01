@@ -11,5 +11,6 @@ public interface ProjectCommandService {
     public Project addMember (Long projectId, ProjectRequestDTO.ProjectMemberAddRequestDto request);
     public Project addMember (Project project, Member member);
     public Project deleteMember (Long projectId, ProjectRequestDTO.ProjectMemberRemoveRequestDto request);
+    public Project deleteProject(Long projectId);
 
 }

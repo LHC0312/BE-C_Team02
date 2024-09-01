@@ -46,4 +46,9 @@ public class IssueQueryServiceImpl implements IssueQueryService{
                 .filter( issue -> issue.getReporter().getRole() == role )
                 .toList();
     }
+
+    public Issue getIssueRecommend(Long issueId) {
+        return issueRepository.findById(issueId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid issue ID"));
+    }
 }

@@ -1,6 +1,7 @@
 package ICT_Team2.ITS_Back_End_main.service.issueService;
 
 import ICT_Team2.ITS_Back_End_main.converter.IssueConverter;
+import ICT_Team2.ITS_Back_End_main.converter.MemberConverter;
 import ICT_Team2.ITS_Back_End_main.domain.Issue;
 import ICT_Team2.ITS_Back_End_main.domain.Member;
 import ICT_Team2.ITS_Back_End_main.domain.Project;
@@ -26,13 +27,16 @@ public class IssueCommandServiceImpl implements IssueCommandService{
     private final AssigneeMemberRepository assigneeMemberRepository;
 
     @Transactional
-    public Issue createIssue(IssueRequestDTO.IssueCreateDTO request) {
+    public Issue createIssue(Long id, IssueRequestDTO.IssueCreateDTO request) {
 
         Project project = projectRepository.findById(request.getProjectId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid project ID"));
 
+        Member reporter = memberRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid project ID"));
 
-        Issue issue = IssueConverter.toIssue(request, project);
+
+        Issue issue = IssueConverter.toIssue(request, project, reporter);
         return issueRepository.save(issue);
     }
 

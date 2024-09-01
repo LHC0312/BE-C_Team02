@@ -15,7 +15,7 @@ public class CommentRequestDTO {
   @Builder
   public static class CreateDto {
     private Long issueId;
-    private String context;
+    private String content;
   }
 
   @Getter
@@ -34,6 +34,6 @@ public class CommentRequestDTO {
   @Builder
   public static class UpdateRequestDto {
     private Long id;
-    private String context;
+    private String content;
   }
 }

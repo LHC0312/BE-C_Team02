@@ -40,8 +40,14 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<AssigneeMember> assigneeMemberList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "writer", cascade = CascadeType.ALL)
     private List<Comment> commentList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "fixer", cascade = CascadeType.ALL)
+    private List<Issue> fixedIssueList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "reporter", cascade = CascadeType.ALL)
+    private List<Issue> reportedIssueList = new ArrayList<>();
 
     public void setRole(Role role) {
         this.role=role;

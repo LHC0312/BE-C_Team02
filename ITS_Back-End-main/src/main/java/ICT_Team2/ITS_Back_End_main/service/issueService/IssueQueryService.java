@@ -12,4 +12,7 @@ public interface IssueQueryService {
     public List<Issue> getDeletedIssue();
     public List<Issue> getIssueByProject(Long projectId);
     public List<Issue> getIssueByRepoter(Long projectId, Role role);
+
+    public Issue getIssueRecommend(Long issueId);
+
 }
