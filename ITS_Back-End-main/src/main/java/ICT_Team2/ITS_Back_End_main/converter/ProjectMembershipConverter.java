@@ -15,6 +15,13 @@ public class ProjectMembershipConverter {
                 .collect(Collectors.toList());
     }
 
+    public static List<Project> toProjects(List<ProjectMembership> projectMemberships) {
+        if (projectMemberships == null)
+            return null;
+        return projectMemberships.stream().map(ProjectMembership::getProject)
+                .collect(Collectors.toList());
+    }
+
     public static ProjectMembership toProjectMemberShip(Member member, Project project) {
         return ProjectMembership.builder()
                 .member(member)

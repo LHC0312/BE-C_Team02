@@ -48,8 +48,8 @@ public class ProjectRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProjectResponseDTO.ProjectResponeDto>> getAllProjects() {
-        List<Project> project = projectQueryService.getAllProjects();
+    public ResponseEntity<List<ProjectResponseDTO.ProjectResponeDto>> getMyProjects(@RequestHeader Long id) {
+        List<Project> project = projectQueryService.getMyProjects(id);
         return ResponseEntity.ok(ProjectConverter.toResponseDto(project));
     }
 

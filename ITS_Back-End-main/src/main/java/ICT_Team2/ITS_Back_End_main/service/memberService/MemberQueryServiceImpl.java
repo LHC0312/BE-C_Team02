@@ -38,7 +38,8 @@ public class MemberQueryServiceImpl implements MemberQueryService {
     @Override
     @Transactional
     public Project findProject(Long memberId, Long projectId) {
-        List<ProjectMembership> projectMemberships = projectMembershipRepository.findByMemberId(memberId);
+        List<ProjectMembership> projectMemberships = projectMembershipRepository.findByMemberId(memberId)
+                .orElseThrow(() -> new MemberHandler(ErrorStatus._MEMBER_NOT_FOUND));;
 
         return projectMemberships.stream()
                 .map(ProjectMembership::getProject)  // Member에서 Project 추출

@@ -25,7 +25,7 @@ public class IssueResponseDTO {
         MemberResponseDTO.MemberResponseDto reporter;
         LocalDateTime reportedDate;
         MemberResponseDTO.MemberResponseDto fixer;
-        List<MemberResponseDTO.MemberResponseDto> assignee;
+        MemberResponseDTO.MemberResponseDto assignee;
         Long projectId;
         String category;
         List<CommentResponseDTO.ResponseDto> comments;

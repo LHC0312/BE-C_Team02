@@ -27,9 +27,10 @@ export const AssigneeControl = () => {
   const [recommendIssues, setRecommendIssues] = useState<
     { issueResponseDto: Issue.Issue; score: number }[]
   >([]);
-
+  
   const project = useProjectStore((state) => state.project);
-
+  console.log(recommendIssues);
+  console.log(users);
   const { getDev, changeAssignee, recommendIssue } = IssueService();
 
   const loadOption = async () => {

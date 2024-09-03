@@ -16,7 +16,6 @@ public class IssueConverter {
 
     public static IssueResponseDTO.IssueResponseDto toResultDTO(Issue issue) {
         if (issue == null) return null;
-        List<Member> assigneeMembers = AssigneeMemberConverter.toMembers(issue.getAssigneeMemberList());
 
         return IssueResponseDTO.IssueResponseDto.builder()
                 .id(issue.getId())
@@ -26,7 +25,7 @@ public class IssueConverter {
                 .status(issue.getStatus().toString())
                 .reporter( MemberConverter.toUserDTO(issue.getReporter()) )
                 .comments( CommentConverter.toResponseDto(issue.getCommentList()) )
-                .assignee( MemberConverter.toUserDTO(assigneeMembers) )
+                .assignee( MemberConverter.toUserDTO(issue.getAssignee()) )
                 .reportedDate(issue.getReportedDate())
                 .fixer( MemberConverter.toUserDTO(issue.getFixer()) )
                 .projectId(issue.getProject().getId())
@@ -48,7 +47,7 @@ public class IssueConverter {
                 .project(project)
                 .reporter(reporter)
                 .category(request.getCategory())
-                .priority(Priority.BLOCKER)
+                .priority(Priority.MAJOR)
                 .status(Status.NEW)
                 .build();
     }

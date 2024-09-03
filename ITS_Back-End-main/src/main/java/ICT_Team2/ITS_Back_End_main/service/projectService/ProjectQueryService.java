@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ProjectQueryService {
     public Project getProjectById(Long id);
-    public List<Project> getAllProjects();
+    public List<Project> getMyProjects(Long id);
     public List<Member> findProjectMember(Long projectId);
 }

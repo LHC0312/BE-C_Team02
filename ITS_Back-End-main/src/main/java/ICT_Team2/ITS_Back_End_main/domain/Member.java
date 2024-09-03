@@ -4,7 +4,6 @@ import ICT_Team2.ITS_Back_End_main.domain.common.BaseEntity;
 
 import ICT_Team2.ITS_Back_End_main.domain.enums.Role;
 import ICT_Team2.ITS_Back_End_main.domain.enums.Status;
-import ICT_Team2.ITS_Back_End_main.domain.mapping.AssigneeMember;
 import ICT_Team2.ITS_Back_End_main.domain.mapping.ProjectMembership;
 import jakarta.persistence.*;
 import lombok.*;
@@ -37,8 +36,8 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<ProjectMembership> projectMembershipList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<AssigneeMember> assigneeMemberList = new ArrayList<>();
+    @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL)
+    private List<Issue> assigneeList = new ArrayList<>();
 
     @OneToMany(mappedBy = "writer", cascade = CascadeType.ALL)
     private List<Comment> commentList = new ArrayList<>();
